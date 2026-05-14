@@ -6,7 +6,9 @@ from chromadb.utils import embedding_functions
 def get_collection():
     import os
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    client = chromadb.PersistentClient(path=os.path.join(BASE_DIR, "vectorstore"))
+    import os
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    client = chromadb.PersistentClient(path=os.path.join(BASE_DIR, "rag", "vectorstore"))
     embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
         model_name="all-MiniLM-L6-v2"
     )
