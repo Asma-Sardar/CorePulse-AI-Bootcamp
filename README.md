@@ -111,17 +111,13 @@ Recovery protocols sourced from:
 
 ---
 
-## Team
-
-Built with 💚 by Team Pulsera · Al Yamamah University, Khobar · 2026
-
 ## Team Members: 
 
-Asma Sardar
-Ayah Alqassab
-Leena Albakawi
-Rana Alshehri
-Hala Alfardan
+- Asma Sardar
+- Ayah Alqassab
+- Leena Albakawi
+- Rana Alshehri
+- Hala Alfardan
 
 ---
 
