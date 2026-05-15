@@ -1,0 +1,2572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulsera • Your Personal Recovery Coach</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F8F6F1;
+  --card: #FFFFFF;
+  --text: #18181B;
+  --sub: #71717A;
+  --accent: #2D4A35;
+  --accent-mid: #4A7A58;
+  --accent-light: #EDF2EE;
+  --gold: #B8965A;
+  --gold-light: #F5EDD8;
+  --border: #E4E1D9;
+  --r: 16px;
+  --shadow: 0 8px 40px rgba(0,0,0,0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .serif { font-family: 'Playfair Display', serif; font-weight: 400; }
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; height: 76px;
+  background: rgba(248,246,241,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--accent); letter-spacing: -0.5px; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { text-decoration: none; font-size: 13px; color: var(--text); font-weight: 500; opacity: 0.7; transition: opacity 0.2s; }
+.nav-links a:hover { opacity: 1; }
+
+/* ── Hero ── */
+#home { padding: 180px 20px 120px; text-align: center; max-width: 860px; margin: 0 auto; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 100px;
+  background: var(--gold-light); color: var(--gold);
+  font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+  margin-bottom: 36px;
+}
+.hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+.hero-title { font-size: clamp(52px, 9vw, 96px); line-height: 0.88; margin-bottom: 30px; }
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-sub { max-width: 460px; margin: 0 auto 48px; color: var(--sub); font-size: 18px; font-weight: 300; }
+.hero-cta {
+  display: inline-block; padding: 18px 44px; background: var(--accent);
+  color: white; border-radius: 4px; text-decoration: none; font-weight: 500;
+  font-size: 14px; letter-spacing: 0.5px; transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(45,74,53,0.3);
+}
+.hero-cta:hover { background: #1E3326; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(45,74,53,0.4); }
+.hero-stats { display: flex; justify-content: center; gap: 60px; margin-top: 80px; border-top: 1px solid var(--border); padding-top: 40px; }
+.stat-val { font-family: 'Playfair Display', serif; font-size: 42px; }
+.stat-label { font-size: 11px; text-transform: uppercase; color: var(--sub); letter-spacing: 1.5px; margin-top: 4px; }
+
+/* ── Features ── */
+.features { padding: 80px 40px 100px; max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+.feature-card { padding: 36px 30px; background: white; border: 1px solid var(--border); border-radius: var(--r); transition: transform 0.3s, box-shadow 0.3s; }
+.feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.feature-emoji { font-size: 28px; margin-bottom: 18px; display: block; }
+.feature-card h3 { font-size: 22px; margin-bottom: 10px; color: var(--accent); }
+.feature-card p { font-size: 14px; color: var(--sub); }
+
+/* ── Form ── */
+#predictor { padding: 100px 20px; background: white; }
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-header h2 { font-size: 44px; margin-bottom: 10px; }
+.section-header p { color: var(--sub); font-size: 16px; }
+
+.form-card { max-width: 960px; margin: 0 auto; background: var(--bg); padding: 56px; border: 1px solid var(--border); border-radius: var(--r); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.form-column-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 28px; color: var(--accent-mid); }
+.field { margin-bottom: 22px; }
+.field label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 8px; color: var(--sub); text-transform: uppercase; letter-spacing: 0.5px; }
+input, select { width: 100%; padding: 12px 0; border: none; border-bottom: 1.5px solid var(--border); background: transparent; font-family: inherit; font-size: 15px; color: var(--text); transition: border-color 0.2s; }
+input:focus, select:focus { outline: none; border-bottom-color: var(--accent); }
+.pill-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.pill { flex: 1; padding: 10px 8px; border: 1.5px solid var(--border); background: white; cursor: pointer; text-align: center; font-size: 12px; font-weight: 500; border-radius: 6px; transition: all 0.2s; }
+.pill:hover { border-color: var(--accent-mid); }
+.pill.active { background: var(--accent); color: white; border-color: var(--accent); }
+.submit-btn {
+  width: 100%; margin-top: 40px; padding: 20px; background: var(--accent); color: white;
+  border: none; font-size: 14px; font-family: inherit; font-weight: 600; cursor: pointer;
+  text-transform: uppercase; letter-spacing: 2.5px; border-radius: 6px; transition: all 0.3s;
+}
+.submit-btn:hover { background: #1E3326; }
+
+/* ── Auto-Calculate Buttons ── */
+.calc-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-left: 10px; padding: 3px 10px;
+  border: 1.5px solid var(--accent-mid); border-radius: 100px;
+  background: var(--accent-light); color: var(--accent);
+  font-size: 10px; font-family: inherit; font-weight: 600;
+  cursor: pointer; letter-spacing: 0.3px; vertical-align: middle;
+  transition: all 0.2s;
+}
+.calc-btn:hover { background: var(--accent); color: white; border-color: var(--accent); transform: scale(1.04); }
+.calc-btn-all { font-size: 10px; padding: 3px 12px; margin-left: 8px; vertical-align: middle; }
+.calc-flash { animation: calcFlash 0.6s ease; }
+@keyframes calcFlash { 0%,100%{background:transparent} 40%{background:rgba(74,122,88,0.15)} }
+
+/* ── Auto-field result display ── */
+.auto-field { position: relative; }
+.auto-tag {
+  display: none; margin-left: 8px;
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--accent-mid); background: var(--accent-light);
+  border: 1px solid rgba(74,122,88,0.3); border-radius: 100px;
+  padding: 2px 8px; vertical-align: middle;
+}
+.auto-tag.show { display: inline; }
+.auto-result {
+  display: none; margin-top: 8px; padding: 10px 14px;
+  background: linear-gradient(135deg, var(--accent-light), #f0f7f1);
+  border: 1px solid rgba(74,122,88,0.2); border-radius: 10px;
+  border-left: 3px solid var(--accent-mid);
+  font-size: 13px; color: var(--text); line-height: 1.5;
+}
+.auto-result.show { display: block; animation: slideDown 0.3s ease; }
+@keyframes slideDown { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+.auto-result strong { color: var(--accent); font-size: 20px; font-family: 'Playfair Display', serif; display: block; margin-bottom: 2px; }
+.auto-result small { color: var(--sub); font-size: 11px; }
+.auto-use-btn {
+  margin-top: 8px; padding: 5px 14px;
+  background: var(--accent); color: white; border: none;
+  border-radius: 6px; font-size: 11px; font-family: inherit;
+  font-weight: 600; cursor: pointer; transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+.auto-use-btn:hover { background: #1E3326; transform: scale(1.02); }
+
+
+.clock-field { margin-bottom: 22px; }
+.clock-field label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 12px; color: var(--sub); text-transform: uppercase; letter-spacing: 0.5px; }
+.clock-wrap { display: flex; align-items: center; gap: 0; border-bottom: 1.5px solid var(--border); padding-bottom: 14px; }
+.clock-display { font-family: 'Playfair Display', serif; font-size: 40px; color: var(--accent); letter-spacing: 4px; min-width: 110px; }
+.clock-controls { display: flex; flex-direction: column; gap: 4px; margin-left: 12px; }
+.clock-btn { width: 28px; height: 26px; border: 1.5px solid var(--border); background: white; border-radius: 6px; cursor: pointer; font-size: 12px; color: var(--accent); display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.clock-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+.clock-hint { font-size: 11px; color: var(--sub); margin-left: 14px; line-height: 1.5; }
+.clock-hint strong { display: block; color: var(--text); font-size: 13px; }
+
+/* ── Live Insight Cards ── */
+.insights-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 36px; padding-top: 32px; border-top: 1px solid var(--border); }
+.insight-card {
+  padding: 18px 16px; border-radius: 12px; border: 1.5px solid var(--border);
+  background: white; transition: all 0.35s; position: relative; overflow: hidden;
+}
+.insight-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg, var(--accent-mid), var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); border-radius: 3px 3px 0 0; }
+.insight-card.has-value::before { transform: scaleX(1); }
+.insight-card.has-value { border-color: rgba(45,74,53,0.2); box-shadow: 0 6px 24px rgba(45,74,53,0.07); }
+.insight-emoji { font-size: 20px; margin-bottom: 8px; display: block; }
+.insight-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--sub); margin-bottom: 6px; }
+.insight-value { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--accent); line-height: 1.2; min-height: 28px; }
+.insight-sub { font-size: 11px; color: var(--sub); margin-top: 5px; line-height: 1.45; min-height: 32px; }
+
+/* ════════════════════════════════════════════════
+   ── ENHANCED RESULTS SECTION ──
+   ════════════════════════════════════════════════ */
+.results-panel { display: none; margin-top: 60px; animation: fadeInUp 0.9s cubic-bezier(0.16,1,0.3,1); }
+.results-panel.show { display: block; }
+@keyframes fadeInUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+
+.report-wrap { max-width: 960px; margin: 0 auto; }
+
+/* Top verdict card */
+.verdict-card {
+  background: var(--accent); color: white; border-radius: var(--r) var(--r) 0 0;
+  padding: 64px 72px 48px; position: relative; overflow: hidden;
+}
+.verdict-card::before {
+  content: ''; position: absolute; top: -80px; right: -80px;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.verdict-card::after {
+  content: ''; position: absolute; bottom: -100px; left: 50%;
+  width: 500px; height: 200px; border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+}
+.verdict-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.6; margin-bottom: 20px; }
+.verdict-title { font-family: 'Playfair Display', serif; font-size: clamp(36px,6vw,64px); line-height: 1.05; margin-bottom: 20px; }
+.verdict-title em { font-style: italic; opacity: 0.75; }
+.verdict-body { font-size: 16px; opacity: 0.8; max-width: 560px; line-height: 1.75; margin-bottom: 40px; }
+
+/* Recovery badge */
+.recovery-badge {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 14px 24px; border-radius: 100px;
+}
+.badge-dot { width: 10px; height: 10px; border-radius: 50%; background: #7AE08A; box-shadow: 0 0 0 4px rgba(122,224,138,0.25); }
+.badge-dot.warn { background: #F0C040; box-shadow: 0 0 0 4px rgba(240,192,64,0.25); }
+.badge-dot.rest { background: #F07070; box-shadow: 0 0 0 4px rgba(240,112,112,0.25); }
+.badge-text { font-size: 13px; font-weight: 600; opacity: 0.9; }
+
+/* Metrics strip */
+.metrics-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: white; border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+}
+.metric-cell { padding: 28px 24px; border-right: 1px solid var(--border); text-align: center; }
+.metric-cell:last-child { border-right: none; }
+.metric-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--sub); margin-bottom: 8px; }
+.metric-value { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--accent); }
+.metric-unit { font-size: 12px; color: var(--sub); margin-top: 2px; }
+
+/* Lower panels */
+.panels-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.panel-block {
+  background: white; padding: 40px 44px;
+  border: 1px solid var(--border);
+}
+.panel-block:first-child { border-right: none; border-radius: 0 0 0 var(--r); }
+.panel-block:last-child { border-radius: 0 0 var(--r) 0; }
+.panel-title { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 24px; color: var(--accent); }
+
+/* Hydration visual */
+.hydration-track { margin: 16px 0 20px; }
+.track-bg { height: 6px; background: var(--border); border-radius: 100px; overflow: hidden; }
+.track-fill { height: 100%; background: linear-gradient(90deg, var(--accent-mid), var(--accent)); border-radius: 100px; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+.hydration-nums { display: flex; justify-content: space-between; font-size: 12px; color: var(--sub); margin-top: 8px; }
+.hydration-message { font-size: 14px; color: var(--sub); line-height: 1.6; }
+.hydration-big { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+.hydration-sub { font-size: 12px; color: var(--sub); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; }
+
+/* Routine steps */
+.steps-list { list-style: none; }
+.step-item { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.step-item:last-child { border-bottom: none; }
+.step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent-light); color: var(--accent); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.step-text { font-size: 14px; color: var(--sub); line-height: 1.6; }
+.step-text strong { color: var(--text); font-weight: 600; }
+
+/* ════════════════════════════════════════════════
+   ── PREMIUM ABOUT SECTION ──
+   ════════════════════════════════════════════════ */
+#about {
+  padding: 0;
+  background: var(--text);
+  color: white;
+  overflow: hidden;
+  position: relative;
+}
+.about-bg-pattern {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(45,74,53,0.4) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(184,150,90,0.15) 0%, transparent 40%);
+  pointer-events: none;
+}
+.about-inner { max-width: 1160px; margin: 0 auto; padding: 120px 40px 80px; position: relative; z-index: 1; }
+.about-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 80px; }
+.about-eyebrow { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.about-eyebrow::before { content:''; width: 32px; height: 1px; background: var(--gold); }
+.about-headline { font-family: 'Playfair Display', serif; font-size: 56px; line-height: 1.05; color: white; }
+.about-headline em { font-style: italic; color: var(--gold); }
+.about-intro { font-size: 17px; color: rgba(255,255,255,0.55); line-height: 1.85; }
+.about-intro strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+.about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; overflow: hidden; margin-bottom: 2px; }
+.about-card {
+  padding: 40px 34px; background: rgba(255,255,255,0.03);
+  transition: background 0.3s;
+  position: relative;
+}
+.about-card:hover { background: rgba(255,255,255,0.07); }
+.about-card::after { content: ''; position: absolute; top: 0; right: 0; width: 1px; height: 100%; background: rgba(255,255,255,0.06); }
+.about-card:last-child::after { display: none; }
+.about-num { font-family: 'Playfair Display', serif; font-size: 64px; color: rgba(255,255,255,0.04); position: absolute; top: 20px; right: 24px; line-height: 1; font-weight: 700; }
+.about-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(45,74,53,0.6); border: 1px solid rgba(45,74,53,0.8); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 22px; }
+.about-card h3 { font-size: 20px; margin-bottom: 12px; color: white; font-family: 'Playfair Display', serif; font-weight: 400; }
+.about-card p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.75; }
+
+/* Stats bar */
+.about-stats-bar { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid rgba(255,255,255,0.06); margin-top: 60px; }
+.about-stat { padding: 40px 0; border-right: 1px solid rgba(255,255,255,0.06); text-align: center; }
+.about-stat:last-child { border-right: none; }
+.about-stat-val { font-family: 'Playfair Display', serif; font-size: 48px; color: white; line-height: 1; margin-bottom: 8px; }
+.about-stat-val span { font-size: 28px; color: var(--gold); }
+.about-stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.35); }
+
+.tech-section { margin-top: 0; padding: 28px 40px; background: rgba(184,150,90,0.08); border-top: 1px solid rgba(184,150,90,0.2); display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+.tech-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.3); }
+.tech-pill { padding: 7px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; font-size: 12px; color: rgba(255,255,255,0.65); font-weight: 500; transition: all 0.2s; }
+.tech-pill:hover { background: rgba(255,255,255,0.1); color: white; }
+
+/* ── Footer ── */
+footer {
+  background: #0E0E0E;
+  color: white;
+  padding: 80px 40px 40px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.footer-inner { max-width: 1160px; margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+.footer-brand .logo { color: #fff; font-size: 30px; margin-bottom: 16px; display: block; }
+.footer-tagline { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 260px; }
+.footer-col h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+.footer-col a { display: block; margin-bottom: 12px; font-size: 14px; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-col a:hover { color: white; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+/* ════════════════════════════════════════════════
+   ── AI ASSISTANT WIDGET ──
+   ════════════════════════════════════════════════ */
+.ai-fab {
+  position: fixed; bottom: 32px; right: 32px; z-index: 1000;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--accent); color: white; border: none;
+  cursor: pointer; font-size: 24px;
+  box-shadow: 0 8px 30px rgba(45,74,53,0.45);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  animation: pulse-ring 2.5s ease-out infinite;
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 8px 30px rgba(45,74,53,0.45), 0 0 0 0 rgba(45,74,53,0.3); }
+  70% { box-shadow: 0 8px 30px rgba(45,74,53,0.45), 0 0 0 14px rgba(45,74,53,0); }
+  100% { box-shadow: 0 8px 30px rgba(45,74,53,0.45), 0 0 0 0 rgba(45,74,53,0); }
+}
+.ai-fab:hover { transform: scale(1.1); }
+.ai-fab.open { border-radius: 16px; width: 52px; height: 52px; font-size: 18px; animation: none; }
+
+.ai-window {
+  position: fixed; bottom: 108px; right: 32px; z-index: 999;
+  width: 360px; background: white; border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.06);
+  display: none; flex-direction: column; overflow: hidden;
+  transform: scale(0.9) translateY(20px);
+  transform-origin: bottom right;
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.ai-window.open { display: flex; transform: scale(1) translateY(0); opacity: 1; }
+
+.ai-header {
+  background: var(--accent); padding: 20px 22px;
+  display: flex; align-items: center; gap: 14px;
+}
+.ai-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.ai-header-info { flex: 1; }
+.ai-name { font-weight: 600; color: white; font-size: 15px; }
+.ai-status { font-size: 11px; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 5px; }
+.ai-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #7AE08A; display: inline-block; }
+.ai-close { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 18px; padding: 4px; transition: color 0.2s; }
+.ai-close:hover { color: white; }
+
+.ai-messages { flex: 1; overflow-y: auto; padding: 20px; max-height: 380px; display: flex; flex-direction: column; gap: 14px; }
+.ai-messages::-webkit-scrollbar { width: 4px; }
+.ai-messages::-webkit-scrollbar-track { background: transparent; }
+.ai-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 100px; }
+
+/* Rich message bubble */
+.msg-bubble.rich { max-width: 96%; font-size: 13px; line-height: 1.6; }
+.msg-bubble.rich p { margin: 0 0 6px; }
+.msg-bubble.rich p:last-child { margin-bottom: 0; }
+.msg-bubble.rich strong { color: var(--accent); }
+.msg-bubble.rich em { font-style: italic; color: var(--sub); }
+
+/* 7-section headers */
+.ai-section-header {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px;
+  margin: 14px 0 6px; padding: 7px 12px; border-radius: 8px;
+  border-left: 3px solid;
+}
+.ai-section-header.timeline  { background: rgba(45,74,53,0.08);  border-color: var(--accent);     color: var(--accent); }
+.ai-section-header.nutrition { background: rgba(184,150,90,0.1); border-color: var(--gold);       color: #8a6c2e; }
+.ai-section-header.hydration { background: rgba(59,130,246,0.08);border-color: #3b82f6;           color: #1d4ed8; }
+.ai-section-header.movement  { background: rgba(139,92,246,0.08);border-color: #8b5cf6;           color: #6d28d9; }
+.ai-section-header.sleep     { background: rgba(99,102,241,0.08);border-color: #6366f1;           color: #4338ca; }
+.ai-section-header.expect    { background: rgba(245,158,11,0.1); border-color: #f59e0b;           color: #92400e; }
+.ai-section-header.avoid     { background: rgba(239,68,68,0.08); border-color: #ef4444;           color: #b91c1c; }
+
+/* Lists inside rich bubbles */
+.ai-list { margin: 6px 0 8px 4px; padding: 0; list-style: none; }
+.ai-list li {
+  padding: 5px 0 5px 18px; position: relative;
+  font-size: 13px; color: var(--text); line-height: 1.6;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.ai-list li:last-child { border-bottom: none; }
+.ai-list li::before {
+  content: '›'; position: absolute; left: 4px;
+  color: var(--accent-mid); font-weight: 700; font-size: 14px;
+}
+
+.msg { display: flex; gap: 10px; align-items: flex-end; }
+.msg.user { flex-direction: row-reverse; }
+.msg-bubble {
+  max-width: 82%; padding: 12px 16px; border-radius: 18px; font-size: 13.5px; line-height: 1.55;
+}
+.msg.bot .msg-bubble { background: var(--bg); color: var(--text); border-radius: 18px 18px 18px 4px; }
+.msg.user .msg-bubble { background: var(--accent); color: white; border-radius: 18px 18px 4px 18px; }
+.msg-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.msg.user .msg-icon { background: var(--gold-light); }
+
+.typing-indicator { display: flex; gap: 4px; align-items: center; padding: 14px 18px; }
+.typing-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sub); opacity: 0.4; animation: typing-bounce 1.2s ease-in-out infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing-bounce { 0%,80%,100% { transform: translateY(0); opacity: 0.4; } 40% { transform: translateY(-6px); opacity: 0.8; } }
+
+.ai-quick-btns { padding: 0 16px 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+.quick-btn {
+  padding: 6px 12px; border: 1.5px solid var(--border); background: white;
+  border-radius: 100px; font-size: 11px; font-family: inherit; cursor: pointer; color: var(--text);
+  transition: all 0.2s; font-weight: 500; white-space: nowrap;
+}
+.quick-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+.ai-input-row {
+  padding: 14px 16px; border-top: 1px solid var(--border);
+  display: flex; gap: 10px; align-items: center; background: white;
+}
+.ai-input {
+  flex: 1; border: 1.5px solid var(--border); border-radius: 100px;
+  padding: 10px 16px; font-size: 13px; font-family: inherit; background: var(--bg);
+  outline: none; transition: border-color 0.2s;
+}
+.ai-input:focus { border-color: var(--accent); }
+.ai-send {
+  width: 38px; height: 38px; border-radius: 50%; background: var(--accent); border: none;
+  color: white; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; flex-shrink: 0;
+}
+.ai-send:hover { background: #1E3326; transform: scale(1.05); }
+.ai-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* RAG Source Badge */
+.rag-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--accent-mid); background: var(--accent-light);
+  border: 1px solid rgba(74,122,88,0.25); border-radius: 100px;
+  padding: 2px 8px; margin-top: 6px; margin-left: 38px;
+}
+.rag-badge::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--accent-mid); display:inline-block; }
+.rag-sources {
+  margin-top: 4px; margin-left: 38px; font-size: 10px; color: var(--sub);
+  background: var(--bg); border-radius: 8px; padding: 6px 10px;
+  border-left: 2px solid var(--accent-light); line-height: 1.6;
+  display: none;
+}
+.rag-sources.show { display: block; }
+.rag-toggle {
+  font-size: 10px; color: var(--accent-mid); cursor: pointer; background: none;
+  border: none; font-family: inherit; padding: 0; margin-left: 38px; margin-top: 2px;
+  text-decoration: underline; opacity: 0.7;
+}
+.rag-toggle:hover { opacity: 1; }
+
+
+/* ── Tap-to-Measure Pulse Widget ── */
+.tap-measure-wrap { margin-top: 14px; }
+.tap-measure-btn {
+  width: 100%; padding: 12px 16px;
+  background: var(--gold-light); color: var(--gold);
+  border: 1.5px solid rgba(184,150,90,0.35);
+  border-radius: 10px; font-family: inherit; font-size: 13px;
+  font-weight: 600; cursor: pointer; letter-spacing: 0.3px;
+  transition: all 0.25s; text-align: center;
+}
+.tap-measure-btn:hover { background: var(--gold); color: white; border-color: var(--gold); }
+.tap-measure-active {
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 12px; padding: 14px 16px;
+  background: linear-gradient(135deg, #fff8f0, #fff3e8);
+  border: 1.5px solid rgba(184,150,90,0.3);
+  border-radius: 12px;
+}
+.tap-timer-ring { position: relative; width: 60px; height: 60px; flex-shrink: 0; }
+.tap-ring-svg { width: 60px; height: 60px; }
+.tap-timer-num {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
+  color: var(--accent);
+}
+.tap-right { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.tap-beat-btn {
+  padding: 14px 20px; background: var(--accent); color: white;
+  border: none; border-radius: 10px; font-family: inherit; cursor: pointer;
+  font-size: 28px; font-weight: 700; line-height: 1;
+  transition: transform 0.08s, background 0.15s;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  box-shadow: 0 4px 16px rgba(45,74,53,0.3);
+  user-select: none; -webkit-user-select: none;
+}
+.tap-beat-btn small { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; opacity: 0.75; }
+.tap-beat-btn:active { transform: scale(0.93); background: #1E3326; }
+.tap-beat-btn.pulse-anim { animation: tapPulse 0.15s ease; }
+@keyframes tapPulse { 0%{transform:scale(1)} 50%{transform:scale(0.92)} 100%{transform:scale(1)} }
+.tap-instruction { font-size: 11px; color: var(--sub); line-height: 1.5; text-align: center; }
+.tap-result {
+  margin-top: 10px; padding: 10px 14px;
+  background: linear-gradient(135deg, var(--accent-light), #f0f7f1);
+  border: 1px solid rgba(74,122,88,0.25); border-radius: 10px;
+  border-left: 3px solid var(--accent); font-size: 13px; color: var(--text);
+  animation: slideDown 0.3s ease;
+}
+.tap-result strong { color: var(--accent); font-family: 'Playfair Display', serif; font-size: 22px; display: block; }
+/* ════════════════════════════════════════════════
+   ── TREND CHARTS & HISTORY PANEL ──
+   ════════════════════════════════════════════════ */
+.trend-section {
+  max-width: 960px; margin: 0 auto 0; padding: 0 0 0;
+  display: none;
+}
+.trend-section.show { display: block; }
+.trend-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 32px 44px 20px; background: white; border: 1px solid var(--border);
+  border-bottom: none;
+}
+.trend-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--accent); }
+.trend-tabs { display: flex; gap: 4px; background: var(--bg); padding: 4px; border-radius: 8px; }
+.trend-tab {
+  padding: 6px 16px; font-size: 12px; font-weight: 600; font-family: inherit;
+  border: none; border-radius: 6px; cursor: pointer; color: var(--sub);
+  background: transparent; transition: all 0.2s;
+}
+.trend-tab.active { background: white; color: var(--accent); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+.trend-canvas-wrap {
+  background: white; border: 1px solid var(--border); border-top: none;
+  padding: 20px 44px 36px; position: relative; min-height: 180px;
+}
+.trend-empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 150px; color: var(--sub); font-size: 14px; gap: 8px;
+}
+.trend-empty-icon { font-size: 36px; opacity: 0.4; }
+
+/* SVG Chart styles */
+.chart-svg { width: 100%; overflow: visible; }
+.chart-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.chart-area { fill: url(#areaGrad); }
+.chart-dot { fill: white; stroke: var(--accent); stroke-width: 2.5; }
+.chart-dot:hover { fill: var(--accent); cursor: pointer; }
+.chart-axis text { font-size: 10px; fill: var(--sub); font-family: 'DM Sans', sans-serif; }
+.chart-axis line { stroke: var(--border); }
+.chart-avg-line { stroke: var(--gold); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.chart-tooltip {
+  position: absolute; background: var(--text); color: white;
+  padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;
+  pointer-events: none; opacity: 0; transition: opacity 0.2s; white-space: nowrap;
+  z-index: 10;
+}
+
+/* Baseline indicator in results */
+.baseline-badge {
+  display: inline-flex; align-items: center; gap: 6px; margin-left: 8px;
+  padding: 2px 10px; border-radius: 100px;
+  background: var(--gold-light); color: var(--gold);
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  vertical-align: middle;
+}
+.baseline-ctx {
+  background: var(--gold-light); border: 1px solid rgba(184,150,90,0.25);
+  border-radius: 10px; padding: 14px 20px; margin-top: 20px;
+  font-size: 13px; color: #7a6030; line-height: 1.65;
+}
+.baseline-ctx strong { color: var(--gold); }
+
+/* History clear button */
+.history-clear-btn {
+  font-size: 11px; color: rgba(255,255,255,0.3); background: none;
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 6px;
+  padding: 4px 10px; cursor: pointer; font-family: inherit; transition: all 0.2s;
+}
+.history-clear-btn:hover { color: #ff8080; border-color: #ff8080; }
+
+/* Persist banner */
+.persist-banner {
+  background: var(--accent-light); border: 1px solid rgba(45,74,53,0.15);
+  border-radius: 10px; padding: 12px 18px; margin-top: 16px;
+  font-size: 13px; color: var(--accent); display: flex; align-items: center; gap: 10px;
+}
+.persist-banner::before { content: '💾'; font-size: 16px; }
+
+@media (max-width: 800px) {
+  .features, .form-grid, .about-grid, .panels-row { grid-template-columns: 1fr; }
+  .metrics-strip { grid-template-columns: repeat(2,1fr); }
+  .about-top { grid-template-columns: 1fr; }
+  .about-stats-bar { grid-template-columns: repeat(2,1fr); }
+  .insights-row { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+  nav { padding: 0 20px; }
+  .verdict-card { padding: 40px 28px 36px; }
+  .ai-window { width: calc(100vw - 24px); right: 12px; bottom: 100px; }
+  .about-headline { font-size: 36px; }
+  .about-stats-bar .about-stat { padding: 28px 0; }
+  .trend-header { padding: 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .trend-canvas-wrap { padding: 16px 20px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Pulsera.</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#predictor">Check-in</a></li>
+    <li><a href="#about">Research</a></li>
+  </ul>
+</nav>
+
+<section id="home">
+  <div class="hero-tag">Research-Backed Coaching</div>
+  <h1 class="hero-title">Listen to your body, <em>properly.</em></h1>
+  <p class="hero-sub">Human advice for human bodies. We translate your workout data into a simple, daily recovery plan.</p>
+  <a href="#predictor" class="hero-cta">Get Your Recovery Plan</a>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-val">86%</div><div class="stat-label">Accuracy</div></div>
+    <div class="stat"><div class="stat-val">21</div><div class="stat-label">Metrics</div></div>
+    <div class="stat"><div class="stat-val">0</div><div class="stat-label">Jargon</div></div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature-card">
+    <span class="feature-emoji">🛡️</span>
+    <h3>Should I train?</h3>
+    <p>We analyze heart rate and load to tell you honestly if you're ready to push or need a quiet day.</p>
+  </div>
+  <div class="feature-card">
+    <span class="feature-emoji">💧</span>
+    <h3>True Hydration</h3>
+    <p>Custom water targets based on your weight and sweat-rate, not a generic "8 glasses" rule.</p>
+  </div>
+  <div class="feature-card">
+    <span class="feature-emoji">📋</span>
+    <h3>Plain Advice</h3>
+    <p>Step-by-step recovery routines written for real people, focused on sleep, food, and movement.</p>
+  </div>
+</section>
+
+<section id="predictor">
+  <div class="section-header">
+    <h2>Morning Check-in</h2>
+    <p>Share your workout details for a tailored recovery guide.</p>
+  </div>
+  <div class="form-card">
+    <form id="predForm" onsubmit="handleSubmit(event)">
+      <div class="form-grid">
+        <div>
+          <div class="form-column-title">01. Identity</div>
+          <div class="field"><label>Date of Birth</label><input type="date" id="dob" onchange="autoFillFromBase()"></div>
+          <div class="field"><label>Gender</label><select id="gender" required onchange="autoFillFromBase()"><option value="Male">Male</option><option value="Female">Female</option></select></div>
+          <div class="field"><label>Weight (kg)</label><input type="number" id="weight" placeholder="e.g. 75" required oninput="autoFillFromBase()"></div>
+          <div class="field"><label>Height (m)</label><input type="number" id="height" step="0.01" placeholder="e.g. 1.75" required oninput="autoFillFromBase()"></div>
+
+          <!-- Body Fat with auto-calc display -->
+          <div class="field auto-field">
+            <label>Body Fat %
+              <span class="auto-tag" id="fatTag"></span>
+            </label>
+            <input type="number" id="fat" placeholder="Auto-calculated below" required oninput="updateInsights()">
+            <div class="auto-result" id="fatResult"></div>
+          </div>
+
+          <div class="form-column-title" style="margin-top:40px">02. Heart Data</div>
+
+          <!-- Resting BPM with Tap-to-Measure -->
+          <div class="field auto-field">
+            <label>Resting BPM
+              <span class="auto-tag" id="restTag"></span>
+            </label>
+            <input type="number" id="restBPM" placeholder="Tap-measure or enter manually" required oninput="updateInsights(); document.getElementById('restTag').textContent='✏️ Manual'; document.getElementById('restTag').classList.add('show');">
+            <div class="auto-result" id="restResult"></div>
+            <div class="tap-measure-wrap" id="tapMeasureWrap">
+              <button type="button" class="tap-measure-btn" id="tapStartBtn" onclick="startTapMeasure()">
+                ❤️ Tap-to-Measure My Pulse
+              </button>
+              <div class="tap-measure-active" id="tapMeasureActive" style="display:none">
+                <div class="tap-timer-ring">
+                  <svg viewBox="0 0 60 60" class="tap-ring-svg">
+                    <circle cx="30" cy="30" r="26" fill="none" stroke="var(--border)" stroke-width="4"/>
+                    <circle cx="30" cy="30" r="26" fill="none" stroke="var(--accent)" stroke-width="4"
+                      stroke-dasharray="163.4" stroke-dashoffset="163.4"
+                      id="tapRingCircle" stroke-linecap="round"
+                      transform="rotate(-90 30 30)"/>
+                  </svg>
+                  <div class="tap-timer-num" id="tapTimerNum">15</div>
+                </div>
+                <div class="tap-right">
+                  <button type="button" class="tap-beat-btn" id="tapBeatBtn" onclick="recordTap()">
+                    <span id="tapBeatCount">0</span>
+                    <small>taps</small>
+                  </button>
+                  <div class="tap-instruction">Tap every time<br>you feel a heartbeat</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Average BPM with auto-calc display -->
+          <div class="field auto-field">
+            <label>Average BPM
+              <span class="auto-tag" id="avgTag"></span>
+            </label>
+            <input type="number" id="avgBPM" placeholder="Auto-calculated below" required oninput="updateInsights()">
+            <div class="auto-result" id="avgResult"></div>
+          </div>
+
+          <!-- Max BPM with auto-calc display -->
+          <div class="field auto-field">
+            <label>Max BPM
+              <span class="auto-tag" id="maxTag"></span>
+            </label>
+            <input type="number" id="maxBPM" placeholder="Auto-calculated below" required oninput="updateInsights()">
+            <div class="auto-result" id="maxResult"></div>
+          </div>
+        </div>
+        <div>
+          <div class="form-column-title">03. The Session</div>
+          <div class="field"><label>Workout Type</label>
+            <div class="pill-group">
+              <div class="pill" onclick="selectWorkout(this,'Yoga')">Yoga</div>
+              <div class="pill" onclick="selectWorkout(this,'Strength')">Strength</div>
+              <div class="pill" onclick="selectWorkout(this,'Cardio')">Cardio</div>
+              <div class="pill" onclick="selectWorkout(this,'HIIT')">HIIT</div>
+            </div>
+            <input type="hidden" id="workoutType">
+          </div>
+
+          <!-- Clock Picker for Duration -->
+          <div class="clock-field">
+            <label>Session Duration</label>
+            <div class="clock-wrap">
+              <div class="clock-display" id="clockDisplay">0:00</div>
+              <div class="clock-controls">
+                <button type="button" class="clock-btn" onclick="adjustClock(1)">▲</button>
+                <button type="button" class="clock-btn" onclick="adjustClock(-1)">▼</button>
+              </div>
+              <div class="clock-hint">
+                <strong id="clockLabel">Set your duration</strong>
+                <span id="clockSub">Tap ▲ ▼ to adjust minutes</span>
+              </div>
+            </div>
+            <input type="hidden" id="duration">
+          </div>
+
+          <div class="field"><label>Calories Burned</label><input type="number" id="calories" required oninput="updateInsights()"></div>
+          <div class="field"><label>Frequency (Times/Week)</label><input type="number" id="frequency" required oninput="updateInsights()"></div>
+          <div class="field"><label>Experience</label>
+            <div class="pill-group">
+              <div class="pill" onclick="selectExp(this,1)">Beginner</div>
+              <div class="pill" onclick="selectExp(this,2)">Intermediate</div>
+              <div class="pill" onclick="selectExp(this,3)">Advanced</div>
+            </div>
+            <input type="hidden" id="experience">
+          </div>
+          <div class="field"><label>Water Intake Today (L)</label><input type="number" id="waterIntake" step="0.1" required oninput="updateInsights()"></div>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">See My Report →</button>
+    </form>
+
+    <!-- Live Insight Cards — update as user types -->
+    <div class="insights-row">
+      <div class="insight-card" id="insightAge">
+        <span class="insight-emoji">🎂</span>
+        <div class="insight-label">Your Age</div>
+        <div class="insight-value" id="insightAgeVal">—</div>
+        <div class="insight-sub" id="insightAgeSub">Enter your date of birth above</div>
+      </div>
+      <div class="insight-card" id="insightBMI">
+        <span class="insight-emoji">⚖️</span>
+        <div class="insight-label">Body Mass Index</div>
+        <div class="insight-value" id="insightBMIVal">—</div>
+        <div class="insight-sub" id="insightBMISub">Enter weight & height above</div>
+      </div>
+      <div class="insight-card" id="insightHR">
+        <span class="insight-emoji">❤️</span>
+        <div class="insight-label">Heart Rate Reserve (HRR)</div>
+        <div class="insight-value" id="insightHRVal">—</div>
+        <div class="insight-sub" id="insightHRSub">Max BPM − Resting BPM = your cardiovascular engine</div>
+      </div>
+      <div class="insight-card" id="insightLBM">
+        <span class="insight-emoji">💪</span>
+        <div class="insight-label">Lean Body Mass</div>
+        <div class="insight-value" id="insightLBMVal">—</div>
+        <div class="insight-sub" id="insightLBMSub">Enter weight & body fat above</div>
+      </div>
+      <div class="insight-card" id="insightVO2">
+        <span class="insight-emoji">🫁</span>
+        <div class="insight-label">Est. VO₂ Max</div>
+        <div class="insight-value" id="insightVO2Val">—</div>
+        <div class="insight-sub" id="insightVO2Sub">Enter heart rate data above</div>
+      </div>
+      <div class="insight-card" id="insightCal">
+        <span class="insight-emoji">🔥</span>
+        <div class="insight-label">Cal / Kg Ratio</div>
+        <div class="insight-value" id="insightCalVal">—</div>
+        <div class="insight-sub" id="insightCalSub">Enter calories & weight above</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENHANCED RESULTS -->
+  <div class="results-panel" id="resultsPanel">
+    <div class="report-wrap">
+      <!-- Verdict Card (dark) -->
+      <div class="verdict-card">
+        <div class="verdict-label">Your Recovery Report</div>
+        <h2 class="verdict-title" id="coachVerdict"></h2>
+        <p class="verdict-body" id="coachSummary"></p>
+        <div class="recovery-badge">
+          <div class="badge-dot" id="badgeDot"></div>
+          <span class="badge-text" id="badgeText"></span>
+        </div>
+      </div>
+
+      <!-- Metrics Strip -->
+      <div class="metrics-strip" style="grid-template-columns: repeat(6,1fr);">
+        <div class="metric-cell">
+          <div class="metric-label">Recovery Load</div>
+          <div class="metric-value" id="resLevel">—</div>
+          <div class="metric-unit">Level</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">Water Target</div>
+          <div class="metric-value" id="resTarget">—</div>
+          <div class="metric-unit">Litres</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">Workout</div>
+          <div class="metric-value" id="resWorkout">—</div>
+          <div class="metric-unit">Type</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">Training Status</div>
+          <div class="metric-value" id="resStatus">—</div>
+          <div class="metric-unit">Today</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">BMI</div>
+          <div class="metric-value" id="resBMI">—</div>
+          <div class="metric-unit" id="resBMIUnit">Index</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-label">Lean Mass</div>
+          <div class="metric-value" id="resLBM">—</div>
+          <div class="metric-unit">kg</div>
+        </div>
+      </div>
+
+      <!-- Lower Panels -->
+      <div class="panels-row">
+        <div class="panel-block">
+          <div class="panel-title">Hydration Status</div>
+          <div class="hydration-big" id="hAmount">—</div>
+          <div class="hydration-sub">Litres consumed today</div>
+          <div class="hydration-track">
+            <div class="track-bg"><div class="track-fill" id="hBar" style="width:0%"></div></div>
+            <div class="hydration-nums"><span id="hLow">0L</span><span id="hTarget">—</span></div>
+          </div>
+          <p class="hydration-message" id="hMessage"></p>
+        </div>
+        <div class="panel-block">
+          <div class="panel-title">Recovery Protocol</div>
+          <ul class="steps-list" id="routineSteps"></ul>
+        </div>
+      </div>
+      <!-- Personalised Baselines Context -->
+      <div id="baselineCtx" style="display:none; border-left:1px solid var(--border); border-right:1px solid var(--border); border-bottom:1px solid var(--border); border-radius:0 0 var(--r) var(--r); background:white; padding:20px 44px 28px;">
+        <div style="font-family:'Playfair Display',serif; font-size:18px; color:var(--accent); margin-bottom:10px;">📈 Your Personal Baselines</div>
+        <div id="baselineText" style="font-size:13px; color:var(--sub); line-height:1.7;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CorePulse DB + GitHub Connection Status Banner -->
+  <div id="connectionStatusBar" style="
+    max-width:960px; margin:0 auto 0; padding:0;
+    display:none;
+  ">
+    <div style="
+      background:white; border:1px solid var(--border); border-top:none;
+      padding:14px 28px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+      font-size:12px; color:var(--sub);
+    ">
+      <span style="font-weight:700;color:var(--text);font-size:11px;text-transform:uppercase;letter-spacing:1.5px;">Live Connection</span>
+
+      <!-- DB status -->
+      <span style="display:inline-flex;align-items:center;gap:6px;">
+        <span id="dbStatusDot" style="width:7px;height:7px;border-radius:50%;background:#F0C040;display:inline-block;"></span>
+        <span id="dbStatus">💾 CorePulse DB · Ready</span>
+      </span>
+
+      <span style="opacity:0.3;">|</span>
+
+      <!-- GitHub KB -->
+      <span style="display:inline-flex;align-items:center;gap:6px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--accent-mid);display:inline-block;"></span>
+        🧠 RAG · <span id="ragStatusInline">Loading…</span>
+      </span>
+
+      <span style="opacity:0.3;">|</span>
+
+      <!-- Groq -->
+      <span style="display:inline-flex;align-items:center;gap:6px;">
+        <span id="groqStatusDot" style="width:7px;height:7px;border-radius:50%;background:#F0C040;display:inline-block;"></span>
+        🤖 Groq LLM · <span id="groqStatusText">Standby</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- TREND CHARTS -->
+  <div class="trend-section" id="trendSection">
+    <div class="trend-header">
+      <h3>Recovery History</h3>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="trend-tabs">
+          <button class="trend-tab active" id="tab7" onclick="switchTab(7)">7 Days</button>
+          <button class="trend-tab" id="tab30" onclick="switchTab(30)">30 Days</button>
+        </div>
+        <button class="history-clear-btn" onclick="clearHistory()">Clear History</button>
+      </div>
+    </div>
+    <div class="trend-canvas-wrap">
+      <div class="chart-tooltip" id="chartTooltip"></div>
+      <div id="chartArea">
+        <div class="trend-empty" id="trendEmpty">
+          <div class="trend-empty-icon">📊</div>
+          <div>Submit your first check-in to start tracking your recovery trend</div>
+        </div>
+        <svg id="trendSvg" class="chart-svg" style="display:none" viewBox="0 0 880 160"></svg>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- PREMIUM ABOUT SECTION -->
+<section id="about">
+  <div class="about-bg-pattern"></div>
+  <div class="about-inner">
+    <div class="about-top">
+      <div>
+        <div class="about-eyebrow">Why Pulsera Exists</div>
+        <h2 class="about-headline">Built on <em>real science,</em><br>not fitness myths.</h2>
+      </div>
+      <div>
+        <p class="about-intro">Too many apps treat recovery as an afterthought. We built Pulsera because <strong>"rest when tired"</strong> is too vague — your body deserves a definitive, data-driven answer every single morning. No guesswork. No generic advice. Just precision.</p>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-num">01</div>
+        <div class="about-icon">🧠</div>
+        <h3>Human Context</h3>
+        <p>We look at heart rate variability and training load together to give you a definitive answer — not a guess. Every metric works in concert.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-num">02</div>
+        <div class="about-icon">💧</div>
+        <h3>No More Generic</h3>
+        <p>Hydration is deeply personal. We calculate your needs based on your unique body weight and the actual intensity of your session — not a one-size rule.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-num">03</div>
+        <div class="about-icon">📊</div>
+        <h3>RAG-Powered AI</h3>
+        <p>Our AI coach uses Retrieval-Augmented Generation — it searches a curated sports science knowledge base before every answer, grounding responses in verified research rather than hallucination.</p>
+      </div>
+    </div>
+
+    <div class="about-stats-bar">
+      <div class="about-stat">
+        <div class="about-stat-val">86<span>%</span></div>
+        <div class="about-stat-label">Model Accuracy</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-val">21<span>+</span></div>
+        <div class="about-stat-label">Health Metrics</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-val">5<span>+</span></div>
+        <div class="about-stat-label">AI Providers</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat-val">0<span>$</span></div>
+        <div class="about-stat-label">Cost to Use</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tech-section" style="flex-wrap:wrap;gap:20px 32px;">
+    <span class="tech-label">Live Systems</span>
+
+    <!-- RAG / GitHub KB Status -->
+    <span class="tech-pill" style="display:inline-flex;align-items:center;gap:7px;">
+      <span id="ragDot" style="width:7px;height:7px;border-radius:50%;background:#888;display:inline-block;transition:background 0.4s;"></span>
+      🧠 RAG · <span id="ragPillText">Loading…</span>
+    </span>
+
+    <!-- CorePulse DB Status -->
+    <span class="tech-pill" style="display:inline-flex;align-items:center;gap:7px;">
+      <span id="dbDot" style="width:7px;height:7px;border-radius:50%;background:#888;display:inline-block;"></span>
+      🗄️ <span id="dbPillText">CorePulse DB · Ready</span>
+    </span>
+
+    <!-- Groq LLM Status -->
+    <span class="tech-pill" style="display:inline-flex;align-items:center;gap:7px;">
+      <span id="groqDot" style="width:7px;height:7px;border-radius:50%;background:#888;display:inline-block;"></span>
+      🤖 Groq · llama-3.3-70b
+    </span>
+
+    <span class="tech-pill">TF-IDF Cosine Retrieval</span>
+    <span class="tech-pill">25 Recovery Protocols</span>
+    <span class="tech-pill"><a href="https://github.com/Asma-Sardar/CorePulse-AI-Bootcamp" target="_blank" style="color:inherit;text-decoration:none;">⚡ CorePulse GitHub</a></span>
+  </div>
+
+  <script>
+  /* Live system status dots */
+  (function() {
+    // KB / RAG dot — updates when loadKnowledgeBase resolves
+    const origBuildRAG = window.buildRAGIndex;
+    function pollRAGReady() {
+      if (window.RAG_READY) {
+        document.getElementById('ragDot').style.background = '#7AE08A';
+        document.getElementById('ragPillText').textContent = (window.KNOWLEDGE_DB || []).length + ' protocols · GitHub';
+      } else {
+        setTimeout(pollRAGReady, 500);
+      }
+    }
+    setTimeout(pollRAGReady, 500);
+
+    // Groq dot — always ready (API key present)
+    document.getElementById('groqDot').style.background = '#F0C040';
+    // It goes green after first successful call — handled by injectGroqCoachCard
+  })();
+  </script>
+</section>
+
+<!-- ENHANCED FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">Pulsera.</div>
+        <p class="footer-tagline">Research-backed recovery coaching for real athletes and everyday movers alike.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#home">Home</a>
+        <a href="#predictor">Morning Check-in</a>
+        <a href="#about">Research</a>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="#">Recovery Science</a>
+        <a href="#">Hydration Guide</a>
+        <a href="#">Heart Rate Zones</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Pulsera Laboratory. Always consult a professional for medical advice.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- AI ASSISTANT FAB -->
+<button class="ai-fab" id="aiFab" onclick="toggleAI()" title="Ask Pulsera AI">🌿</button>
+
+<!-- AI CHAT WINDOW -->
+<div class="ai-window" id="aiWindow" style="display:none">
+  <div class="ai-header">
+    <div class="ai-avatar">🌿</div>
+    <div class="ai-header-info">
+      <div class="ai-name">Pulsera Elite Coach</div>
+      <div class="ai-status" id="ragStatus">Online · RAG-Powered · Loading KB…</div>
+    </div>
+    <button class="ai-close" onclick="toggleAI()">✕</button>
+  </div>
+
+  <div class="ai-messages" id="aiMessages">
+    <div class="msg bot">
+      <div class="msg-icon">🌿</div>
+      <div class="msg-bubble rich">
+        <p>Hey — tell me about your session. What did you do, how long, and how are you feeling right now? The more you give me, the more specific I can be with your recovery plan.</p>
+        <p style="margin-top:6px;font-size:12px;color:var(--sub);">If you know your weight, intensity, or experience level — throw that in too.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-quick-btns" id="quickBtns">
+    <button class="quick-btn" onclick="askQuick('I just finished a tough 45-min HIIT session. I weigh 72kg, intermediate level. Legs are shot. What do I do now?')">⚡ Just finished HIIT</button>
+    <button class="quick-btn" onclick="askQuick('Heavy strength day — squats, deadlifts, bench press. 80kg bodyweight, been training 3 years. Feel good but tired. How do I recover properly?')">🏋️ After heavy lifting</button>
+    <button class="quick-btn" onclick="askQuick('I ran 8km, moderate pace. 65kg, been running for 6 months. First long run in a while. Legs feel heavy. What should I do tonight?')">🏃 After a long run</button>
+    <button class="quick-btn" onclick="askQuick('I\'ve been training 6 days in a row and I\'m exhausted. My resting heart rate is elevated. Am I overtraining? What should I do?')">😴 I think I\'m overtrained</button>
+  </div>
+
+  <div class="ai-input-row">
+    <input class="ai-input" id="aiInput" type="text" placeholder="Tell me about your workout — what, how long, how you feel…" onkeydown="if(event.key==='Enter')sendMessage()">
+    <button class="ai-send" id="aiSendBtn" onclick="sendMessage()">↑</button>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════
+   AUTO-CALCULATE — runs live as user fills form
+   ════════════════════════════════════════════════ */
+function getAge() {
+  const dob = document.getElementById('dob').value;
+  if (!dob) return null;
+  const b = new Date(dob), n = new Date();
+  let age = n.getFullYear() - b.getFullYear();
+  if (n.getMonth() < b.getMonth() || (n.getMonth()===b.getMonth() && n.getDate()<b.getDate())) age--;
+  return age > 0 ? age : null;
+}
+
+function showResult(resultId, tagId, value, label, detail, fieldId) {
+  const box = document.getElementById(resultId);
+  const tag = document.getElementById(tagId);
+  box.innerHTML = `<strong>${value}</strong><small>${detail}</small><br><button class="auto-use-btn" onclick="useValue('${fieldId}', ${parseFloat(value)})">✓ Use This Value</button>`;
+  box.classList.add('show');
+  tag.textContent = '⚡ Auto-calculated';
+  tag.classList.add('show');
+}
+
+function hideResult(resultId, tagId) {
+  document.getElementById(resultId).classList.remove('show');
+  document.getElementById(tagId).classList.remove('show');
+}
+
+function useValue(fieldId, val) {
+  document.getElementById(fieldId).value = val;
+  updateInsights();
+}
+
+function autoFillFromBase() {
+  const age = getAge();
+  const w = +document.getElementById('weight').value;
+  const h = +document.getElementById('height').value;
+  const gender = document.getElementById('gender').value;
+  const isMale = gender === 'Male';
+
+  // ── Body Fat % (Deurenberg formula) ──
+  if (age && w > 0 && h > 0) {
+    const bmi = w / (h * h);
+    let bf = (1.20 * bmi) + (0.23 * age) - (10.8 * (isMale ? 1 : 0)) - 5.4;
+    bf = Math.max(3, Math.min(60, Math.round(bf * 10) / 10));
+    let cat = bf < 10 ? 'Essential fat' : bf < 20 ? 'Athletic' : bf < 25 ? 'Fitness' : bf < 30 ? 'Average' : 'Above average';
+    showResult('fatResult','fatTag', bf+'%', 'Body Fat', `📊 ${cat} range · Based on BMI ${(bmi).toFixed(1)} (Deurenberg formula)`, 'fat');
+  } else { hideResult('fatResult','fatTag'); }
+
+  // ── Max BPM (Tanaka formula: 208 − 0.7 × age) ──
+  if (age) {
+    const maxBpm = Math.round(208 - 0.7 * age);
+    showResult('maxResult','maxTag', maxBpm+' bpm', 'Max BPM', `🏃 Tanaka formula — more accurate than 220−age`, 'maxBPM');
+
+    // ── Resting BPM — population estimate shown as suggestion only (Tap-to-Measure is preferred) ──
+    let restEst = isMale ? 70 : 74;
+    if      (age < 20) restEst = isMale ? 68 : 72;
+    else if (age < 30) restEst = isMale ? 68 : 72;
+    else if (age < 40) restEst = isMale ? 70 : 74;
+    else if (age < 50) restEst = isMale ? 71 : 75;
+    else if (age < 60) restEst = isMale ? 72 : 76;
+    else               restEst = isMale ? 73 : 77;
+    // Only show estimate if user hasn't already used tap-to-measure
+    const restInput = document.getElementById('restBPM');
+    if (!restInput._tapMeasured) {
+      let restLabel = restEst <= 60 ? 'Athlete-level' : restEst <= 70 ? 'Excellent' : restEst <= 80 ? 'Normal' : 'Above average';
+      showResult('restResult','restTag', restEst+' bpm', 'Population estimate', `📊 ${restLabel} avg for ${gender.toLowerCase()} aged ${age} — use ❤️ Tap-to-Measure for accuracy`, 'restBPM');
+    }
+    const rest = +restInput.value || restEst;
+
+    // ── Average BPM — workout-type-aware intensity multiplier ──
+    const hrr = maxBpm - rest;
+    const workoutIntensity = {
+      'Yoga':     { lo: 0.40, hi: 0.50, label: 'Zone 1–2 · Parasympathetic' },
+      'Strength': { lo: 0.55, hi: 0.70, label: 'Zone 2–3 · Moderate effort' },
+      'Cardio':   { lo: 0.60, hi: 0.70, label: 'Zone 2–3 · Aerobic base' },
+      'HIIT':     { lo: 0.80, hi: 0.90, label: 'Zone 4–5 · High intensity' }
+    };
+    const wType = document.getElementById('workoutType').value || 'Cardio';
+    const wi = workoutIntensity[wType] || workoutIntensity['Cardio'];
+    const intensityMid = (wi.lo + wi.hi) / 2;
+    const avg = Math.round(rest + hrr * intensityMid);
+    showResult('avgResult','avgTag', avg+' bpm', 'Average BPM', `💓 ${wi.label} · ${Math.round(wi.lo*100)}–${Math.round(wi.hi*100)}% HRR · HRR = ${hrr} bpm`, 'avgBPM');
+  } else {
+    hideResult('maxResult','maxTag');
+    hideResult('restResult','restTag');
+    hideResult('avgResult','avgTag');
+  }
+
+  updateInsights();
+}
+
+function flashField(id) {
+  const el = document.getElementById(id);
+  el.classList.remove('calc-flash');
+  void el.offsetWidth;
+  el.classList.add('calc-flash');
+  setTimeout(() => el.classList.remove('calc-flash'), 700);
+}
+
+/* ── Clock Picker Logic ── */
+let clockMinutes = 0;
+function adjustClock(dir) {
+  clockMinutes = Math.max(0, Math.min(600, clockMinutes + dir * 15));
+  const h = Math.floor(clockMinutes / 60);
+  const m = clockMinutes % 60;
+  document.getElementById('clockDisplay').textContent = h + ':' + String(m).padStart(2,'0');
+  document.getElementById('duration').value = (clockMinutes / 60).toFixed(2);
+  // Update hint
+  const labels = ['Set your duration','15 min — warm-up zone','30 min — light session','45 min — solid work','1 hour — strong session','1.5 hrs — endurance block','2+ hrs — elite training'];
+  const idx = Math.min(Math.floor(clockMinutes / 15), labels.length - 1);
+  document.getElementById('clockLabel').textContent = clockMinutes === 0 ? 'Tap ▲ to set duration' : (h > 0 ? h + 'h ' : '') + (m > 0 ? m + 'min session' : '');
+  document.getElementById('clockSub').textContent = clockMinutes === 0 ? 'Adjusts in 15-minute steps' : labels[idx] || labels[labels.length-1];
+  updateInsights();
+}
+
+/* ── Live Insights Logic ── */
+function updateInsights() {
+  // Age from birthday
+  const dob = document.getElementById('dob').value;
+  const ageCard = document.getElementById('insightAge');
+  if (dob) {
+    const birth = new Date(dob);
+    const now = new Date();
+    let age = now.getFullYear() - birth.getFullYear();
+    const m = now.getMonth() - birth.getMonth();
+    if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--;
+    const nextBday = new Date(now.getFullYear(), birth.getMonth(), birth.getDate());
+    if (nextBday < now) nextBday.setFullYear(now.getFullYear() + 1);
+    const daysLeft = Math.ceil((nextBday - now) / 86400000);
+    document.getElementById('insightAgeVal').textContent = age + ' yrs';
+    document.getElementById('insightAgeSub').textContent = daysLeft === 1 ? '🎉 Happy Birthday tomorrow!' : daysLeft <= 30 ? `🎂 Birthday in ${daysLeft} days!` : `Next birthday in ${daysLeft} days`;
+    ageCard.classList.add('has-value');
+  } else { ageCard.classList.remove('has-value'); document.getElementById('insightAgeVal').textContent = '—'; document.getElementById('insightAgeSub').textContent = 'Enter your date of birth above'; }
+
+  // BMI
+  const w = +document.getElementById('weight').value;
+  const h = +document.getElementById('height').value;
+  const bmiCard = document.getElementById('insightBMI');
+  if (w > 0 && h > 0) {
+    const bmi = (w / (h * h)).toFixed(1);
+    let cat = '', emoji = '';
+    if (bmi < 18.5) { cat = 'Underweight — consider more calories'; emoji = '📉'; }
+    else if (bmi < 25) { cat = 'Healthy weight — well done!'; emoji = '✅'; }
+    else if (bmi < 30) { cat = 'Overweight — light adjustments help'; emoji = '⚠️'; }
+    else { cat = 'Obese range — consult a professional'; emoji = '🩺'; }
+    document.getElementById('insightBMIVal').textContent = bmi;
+    document.getElementById('insightBMISub').textContent = emoji + ' ' + cat;
+    bmiCard.classList.add('has-value');
+  } else { bmiCard.classList.remove('has-value'); document.getElementById('insightBMIVal').textContent = '—'; document.getElementById('insightBMISub').textContent = 'Enter weight & height above'; }
+
+  // HR Reserve (Karvonen)
+  const rest = +document.getElementById('restBPM').value;
+  const max = +document.getElementById('maxBPM').value;
+  const hrCard = document.getElementById('insightHR');
+  if (rest > 0 && max > 0 && max > rest) {
+    const hrr = max - rest;
+    let fit = '';
+    if (hrr > 60) fit = 'Excellent cardiovascular fitness';
+    else if (hrr > 45) fit = 'Good fitness baseline';
+    else fit = 'Room to improve cardio base';
+    document.getElementById('insightHRVal').textContent = hrr + ' bpm';
+    document.getElementById('insightHRSub').textContent = '💓 ' + fit;
+    hrCard.classList.add('has-value');
+  } else { hrCard.classList.remove('has-value'); document.getElementById('insightHRVal').textContent = '—'; document.getElementById('insightHRSub').textContent = 'Enter resting & max BPM above'; }
+
+  // Lean Body Mass
+  const fat = +document.getElementById('fat').value;
+  const lbmCard = document.getElementById('insightLBM');
+  if (w > 0 && fat > 0) {
+    const lbm = (w * (1 - fat / 100)).toFixed(1);
+    const fatMass = (w - lbm).toFixed(1);
+    document.getElementById('insightLBMVal').textContent = lbm + ' kg';
+    document.getElementById('insightLBMSub').textContent = `🏋️ ${fatMass}kg fat · ${lbm}kg muscle & bone`;
+    lbmCard.classList.add('has-value');
+  } else { lbmCard.classList.remove('has-value'); document.getElementById('insightLBMVal').textContent = '—'; document.getElementById('insightLBMSub').textContent = 'Enter weight & body fat above'; }
+
+  // VO2 Max estimate (Uth–Sørensen formula)
+  const vo2Card = document.getElementById('insightVO2');
+  if (rest > 0 && max > 0) {
+    const vo2 = (15 * (max / rest)).toFixed(0);
+    let rating = '';
+    if (vo2 >= 60) rating = 'Elite athlete level 🏆';
+    else if (vo2 >= 50) rating = 'Excellent fitness 🥇';
+    else if (vo2 >= 40) rating = 'Good aerobic capacity 👍';
+    else if (vo2 >= 30) rating = 'Average — room to grow 📈';
+    else rating = 'Below average — start building 💪';
+    document.getElementById('insightVO2Val').textContent = vo2 + ' ml/kg';
+    document.getElementById('insightVO2Sub').textContent = rating;
+    vo2Card.classList.add('has-value');
+  } else { vo2Card.classList.remove('has-value'); document.getElementById('insightVO2Val').textContent = '—'; document.getElementById('insightVO2Sub').textContent = 'Enter heart rate data above'; }
+
+  // Calories per kg
+  const cal = +document.getElementById('calories').value;
+  const calCard = document.getElementById('insightCal');
+  if (cal > 0 && w > 0) {
+    const ratio = (cal / w).toFixed(1);
+    let intensity = '';
+    if (ratio < 4) intensity = 'Light intensity session';
+    else if (ratio < 7) intensity = 'Moderate effort — solid work';
+    else if (ratio < 10) intensity = 'High intensity — great job!';
+    else intensity = 'Extreme effort — rest well tonight';
+    document.getElementById('insightCalVal').textContent = ratio + ' cal/kg';
+    document.getElementById('insightCalSub').textContent = '🔥 ' + intensity;
+    calCard.classList.add('has-value');
+  } else { calCard.classList.remove('has-value'); document.getElementById('insightCalVal').textContent = '—'; document.getElementById('insightCalSub').textContent = 'Enter calories & weight above'; }
+}
+
+/* ── Form Logic ── */
+/* ════════════════════════════════════════════════
+   LOCALSTORAGE — Persistent Memory Engine
+   Stores: profile, check-in history array
+   ════════════════════════════════════════════════ */
+const LS_PROFILE = 'pulsera_profile';
+const LS_HISTORY = 'pulsera_history';
+
+function saveProfile(d) {
+  try { localStorage.setItem(LS_PROFILE, JSON.stringify(d)); } catch(e) {}
+}
+function loadProfile() {
+  try { return JSON.parse(localStorage.getItem(LS_PROFILE)) || null; } catch(e) { return null; }
+}
+function getHistory() {
+  try { return JSON.parse(localStorage.getItem(LS_HISTORY)) || []; } catch(e) { return []; }
+}
+function saveHistory(entry) {
+  const h = getHistory();
+  h.push(entry);
+  // Keep max 90 days
+  if (h.length > 90) h.splice(0, h.length - 90);
+  try { localStorage.setItem(LS_HISTORY, JSON.stringify(h)); } catch(e) {}
+}
+function clearHistory() {
+  if (!confirm('Clear all recovery history? This cannot be undone.')) return;
+  localStorage.removeItem(LS_HISTORY);
+  document.getElementById('trendSection').classList.remove('show');
+  document.getElementById('baselineCtx').style.display = 'none';
+}
+
+/* ── Personalized Baselines from History ── */
+function mean(arr) { return arr.length ? arr.reduce((a,b) => a+b, 0) / arr.length : null; }
+
+function computeBaselines() {
+  const h = getHistory().slice(-30);
+  if (h.length < 5) return null;
+  const avgRestBPM   = mean(h.map(e => e.restBPM).filter(Boolean));
+  const avgWeeklyLoad= mean(h.map(e => e.frequency).filter(Boolean));
+  const avgDuration  = mean(h.map(e => e.duration).filter(Boolean));
+  return { avgRestBPM, avgWeeklyLoad, avgDuration, n: h.length };
+}
+
+function showBaselines(current) {
+  const bl = computeBaselines();
+  if (!bl) { document.getElementById('baselineCtx').style.display = 'none'; return; }
+  document.getElementById('baselineCtx').style.display = 'block';
+  const rDiff = bl.avgRestBPM ? (current.restBPM - bl.avgRestBPM).toFixed(1) : null;
+  const lDiff = bl.avgWeeklyLoad ? (current.frequency - bl.avgWeeklyLoad).toFixed(1) : null;
+  const dDiff = bl.avgDuration ? (current.duration - bl.avgDuration).toFixed(2) : null;
+  document.getElementById('baselineText').innerHTML =
+    `Based on your last <strong>${bl.n} check-ins</strong>:<br>` +
+    (rDiff !== null ? `❤️ Your resting BPM today is <strong>${rDiff > 0 ? '+' : ''}${rDiff} bpm</strong> vs your personal average of <strong>${bl.avgRestBPM.toFixed(0)} bpm</strong> — ${Math.abs(rDiff) < 3 ? 'within your normal range 🟢' : rDiff > 0 ? 'elevated, suggesting fatigue 🟡' : 'lower than usual, great recovery 🟢'}.<br>` : '') +
+    (lDiff !== null ? `🗓️ Training ${lDiff > 0 ? `<strong>${lDiff}x more</strong> than your average` : `<strong>${Math.abs(lDiff)}x less</strong> than your average`} (your norm: ${bl.avgWeeklyLoad.toFixed(1)}×/week).<br>` : '') +
+    (dDiff !== null ? `⏱️ Session was ${Math.abs(dDiff*60).toFixed(0)} min ${dDiff > 0 ? 'longer' : 'shorter'} than your usual ${(bl.avgDuration*60).toFixed(0)} min average.` : '');
+}
+
+/* ── Restore saved profile to form ── */
+function restoreProfile() {
+  const p = loadProfile();
+  if (!p) return;
+  if (p.dob) document.getElementById('dob').value = p.dob;
+  if (p.gender) document.getElementById('gender').value = p.gender;
+  if (p.weight) document.getElementById('weight').value = p.weight;
+  if (p.height) document.getElementById('height').value = p.height;
+  autoFillFromBase();
+}
+
+/* ════════════════════════════════════════════════
+   TREND CHART ENGINE — Pure SVG, no library
+   ════════════════════════════════════════════════ */
+let currentTabDays = 7;
+
+function switchTab(days) {
+  currentTabDays = days;
+  document.getElementById('tab7').classList.toggle('active', days === 7);
+  document.getElementById('tab30').classList.toggle('active', days === 30);
+  renderChart(days);
+}
+
+function renderChart(days) {
+  const allHistory = getHistory();
+  const cutoff = Date.now() - days * 86400000;
+  const history = allHistory.filter(e => e.ts >= cutoff);
+
+  const empty = document.getElementById('trendEmpty');
+  const svg   = document.getElementById('trendSvg');
+
+  if (history.length < 2) {
+    empty.style.display = 'flex';
+    svg.style.display = 'none';
+    return;
+  }
+  empty.style.display = 'none';
+  svg.style.display = 'block';
+
+  const W = 880, H = 160, PAD = { t: 16, r: 20, b: 36, l: 44 };
+  const plotW = W - PAD.l - PAD.r;
+  const plotH = H - PAD.t - PAD.b;
+
+  // Map level to score: Low=1, Medium=2, High=3
+  const levelMap = { Low: 1, Medium: 2, High: 3 };
+  const scores = history.map(e => levelMap[e.level] || 1);
+  const minS = 1, maxS = 3;
+
+  const xScale = i => PAD.l + (i / (history.length - 1)) * plotW;
+  const yScale = s => PAD.t + plotH - ((s - minS) / (maxS - minS)) * plotH;
+
+  const points = scores.map((s, i) => [xScale(i), yScale(s)]);
+  const pathD = points.map((p, i) => (i === 0 ? `M${p[0]},${p[1]}` : `L${p[0]},${p[1]}`)).join(' ');
+  const areaD = `M${points[0][0]},${H - PAD.b} ` + points.map(p => `L${p[0]},${p[1]}`).join(' ') + ` L${points[points.length-1][0]},${H - PAD.b} Z`;
+
+  // Rolling avg line (for 30-day view)
+  let avgPath = '';
+  if (days === 30 && scores.length >= 5) {
+    const window = 7;
+    const avgPoints = scores.map((_, i) => {
+      const slice = scores.slice(Math.max(0, i - window + 1), i + 1);
+      const avg = slice.reduce((a,b) => a+b, 0) / slice.length;
+      return [xScale(i), yScale(avg)];
+    });
+    avgPath = avgPoints.map((p, i) => (i === 0 ? `M${p[0]},${p[1]}` : `L${p[0]},${p[1]}`)).join(' ');
+  }
+
+  // Y-axis labels
+  const yLabels = [
+    { s: 3, label: 'High Load' },
+    { s: 2, label: 'Medium' },
+    { s: 1, label: 'Low Load' }
+  ];
+
+  // X-axis labels (dates)
+  const xLabelIdxs = history.length <= 7
+    ? history.map((_, i) => i)
+    : [0, Math.floor(history.length/3), Math.floor(history.length*2/3), history.length-1];
+
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.01"/>
+      </linearGradient>
+    </defs>
+    <!-- Grid lines -->
+    ${yLabels.map(y => `
+      <line x1="${PAD.l}" y1="${yScale(y.s)}" x2="${W - PAD.r}" y2="${yScale(y.s)}"
+        stroke="var(--border)" stroke-width="1"/>
+      <text x="${PAD.l - 6}" y="${yScale(y.s) + 4}" text-anchor="end"
+        font-size="10" fill="var(--sub)" font-family="DM Sans, sans-serif">${y.label}</text>
+    `).join('')}
+    <!-- Area fill -->
+    <path d="${areaD}" class="chart-area"/>
+    <!-- Rolling avg (30d) -->
+    ${avgPath ? `<path d="${avgPath}" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.7"/>` : ''}
+    <!-- Main line -->
+    <path d="${pathD}" class="chart-line"/>
+    <!-- Dots -->
+    ${points.map((p, i) => `
+      <circle cx="${p[0]}" cy="${p[1]}" r="5" class="chart-dot"
+        data-date="${new Date(history[i].ts).toLocaleDateString()}"
+        data-level="${history[i].level}"
+        data-workout="${history[i].workoutType || ''}"
+        onmouseenter="showChartTip(event, this)"
+        onmouseleave="hideChartTip()"/>
+    `).join('')}
+    <!-- X labels -->
+    ${xLabelIdxs.map(i => `
+      <text x="${xScale(i)}" y="${H - PAD.b + 18}" text-anchor="middle"
+        font-size="10" fill="var(--sub)" font-family="DM Sans, sans-serif">
+        ${new Date(history[i].ts).toLocaleDateString('en', {month:'short',day:'numeric'})}
+      </text>
+    `).join('')}
+    ${days === 30 && avgPath ? `<text x="${W - PAD.r}" y="${PAD.t + 10}" text-anchor="end" font-size="10" fill="var(--gold)" font-family="DM Sans, sans-serif">— 7-day avg</text>` : ''}
+  `;
+}
+
+function showChartTip(e, el) {
+  const tip = document.getElementById('chartTooltip');
+  const levelIcon = { Low: '✅', Medium: '⚠️', High: '🔴' };
+  tip.innerHTML = `${levelIcon[el.dataset.level] || ''} <strong>${el.dataset.date}</strong> · ${el.dataset.level} Load${el.dataset.workout ? ' · ' + el.dataset.workout : ''}`;
+  const rect = el.closest('.trend-canvas-wrap').getBoundingClientRect();
+  const eRect = e.target.getBoundingClientRect();
+  tip.style.left = (eRect.left - rect.left - 60) + 'px';
+  tip.style.top  = (eRect.top  - rect.top  - 44) + 'px';
+  tip.style.opacity = '1';
+}
+function hideChartTip() {
+  document.getElementById('chartTooltip').style.opacity = '0';
+}
+
+/* ════════════════════════════════════════════════
+   FORM LOGIC — Karvonen-corrected + localStorage
+   ════════════════════════════════════════════════ */
+let selectedWorkout = '', selectedExp = 0;
+function selectWorkout(el, val) {
+  document.querySelectorAll('#predictor .pill').forEach(p => { if(!['Beginner','Intermediate','Advanced'].includes(p.innerText)) p.classList.remove('active'); });
+  el.classList.add('active'); selectedWorkout = val; document.getElementById('workoutType').value = val; autoFillFromBase();
+}
+function selectExp(el, val) {
+  el.parentNode.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active'); selectedExp = val; document.getElementById('experience').value = val;
+}
+
+/* ── Karvonen formula: Avg BPM = (HRR × Intensity%) + Resting BPM ── */
+const KARVONEN_INTENSITY = { Yoga: 0.45, Strength: 0.65, Cardio: 0.65, HIIT: 0.85 };
+const WORKOUT_FACTOR = { Yoga:.7, Strength:1.0, Cardio:1.1, HIIT:1.3 };
+const EXPERIENCE_FACTOR = { 1:1.25, 2:1.0, 3:0.85 };
+
+function karvonenAvgBPM(restBPM, maxBPM, workoutType) {
+  const hrr = maxBPM - restBPM;
+  const intensity = KARVONEN_INTENSITY[workoutType] || 0.65;
+  return Math.round((hrr * intensity) + restBPM);
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  let age = 25;
+  const dob = document.getElementById('dob').value;
+  if (dob) {
+    const b = new Date(dob), n = new Date();
+    age = n.getFullYear() - b.getFullYear();
+    if (n.getMonth() < b.getMonth() || (n.getMonth()===b.getMonth() && n.getDate()<b.getDate())) age--;
+  }
+
+  const restBPM = +document.getElementById('restBPM').value;
+  const maxBPM  = +document.getElementById('maxBPM').value;
+  const wType   = selectedWorkout || 'Cardio';
+
+  // ── KARVONEN FIX: If avgBPM not manually entered, auto-compute ──
+  let avgBPM = +document.getElementById('avgBPM').value;
+  if (!avgBPM && restBPM && maxBPM) {
+    avgBPM = karvonenAvgBPM(restBPM, maxBPM, wType);
+    document.getElementById('avgBPM').value = avgBPM;
+  }
+
+  const d = {
+    age, restBPM, maxBPM, avgBPM,
+    weight: +document.getElementById('weight').value,
+    height: +document.getElementById('height').value,
+    duration: +document.getElementById('duration').value,
+    workoutType: wType,
+    experience: selectedExp || 2,
+    calories: +document.getElementById('calories').value,
+    frequency: +document.getElementById('frequency').value,
+    waterIntake: +document.getElementById('waterIntake').value
+  };
+
+  // ── Recovery Score (unchanged formula) ──
+  const rs = (d.duration * d.avgBPM * d.frequency)
+    * Math.pow((d.avgBPM / d.maxBPM), 1.5)
+    * (d.avgBPM - d.restBPM)
+    * (WORKOUT_FACTOR[d.workoutType] || 1)
+    * (EXPERIENCE_FACTOR[d.experience] || 1);
+  let level = rs <= 11216 ? 'Low' : (rs <= 22417 ? 'Medium' : 'High');
+  const target = Math.round((d.weight * 0.033 + d.duration * 0.7 + (d.calories / 1000)) * 10) / 10;
+
+  // ── Persist profile & history ──
+  saveProfile({ dob, gender: document.getElementById('gender').value, weight: d.weight, height: d.height });
+  // Update AI context with this submission
+  lastRecoveryScore = rs <= 11216 ? 25 : rs <= 22417 ? 55 : 85;
+  lastWorkoutType   = d.workoutType;
+  lastExperience    = d.experience === 1 ? 'beginner' : d.experience === 3 ? 'advanced' : 'intermediate';
+  formSubmitted = true;
+
+  // Inject real KB protocol actions into the report panel
+  if (RAG_READY) {
+    const kbDocs = metadataRetrieve(lastRecoveryScore, d.workoutType, lastExperience);
+    if (kbDocs.length > 0) {
+      const best = kbDocs[0];
+      if (best.actions && best.actions.length) {
+        document.getElementById('routineSteps').innerHTML = best.actions.map((s, i) =>
+          '<li class="step-item"><div class="step-num">' + (i+1) + '</div><div class="step-text">' + s + '</div></li>'
+        ).join('');
+      }
+      // Add source citation
+      const panel = document.getElementById('routineSteps').closest ? document.getElementById('routineSteps').closest('.panel-block') : null;
+      if (panel) {
+        const old = panel.querySelector('.kb-source');
+        if (old) old.remove();
+        const cite = document.createElement('div');
+        cite.className = 'kb-source';
+        cite.style.cssText = 'margin-top:14px;padding:10px 14px;background:var(--accent-light);border-radius:8px;font-size:11px;color:var(--accent);';
+        cite.innerHTML = '<strong>' + (best.title || '') + '</strong>' +
+          (best.sources && best.sources.length ? '<br><span style="color:var(--sub)">' + best.sources.slice(0,2).join(' · ') + '</span>' : '') +
+          (best.return_to_training && !best.return_to_training.includes('N/A') ? '<br><span style="color:var(--accent-mid)">⏰ ' + best.return_to_training + '</span>' : '');
+        panel.appendChild(cite);
+      }
+    }
+  }
+
+  saveHistory({ ts: Date.now(), level, workoutType: d.workoutType, restBPM: d.restBPM, maxBPM: d.maxBPM, avgBPM: d.avgBPM, frequency: d.frequency, duration: d.duration, waterIntake: d.waterIntake });
+
+  // ── Fill metrics strip ──
+  document.getElementById('resLevel').innerText = level;
+  document.getElementById('resTarget').innerText = target + 'L';
+  document.getElementById('resWorkout').innerText = d.workoutType;
+  document.getElementById('hAmount').innerText = d.waterIntake + 'L';
+  document.getElementById('hTarget').innerText = target + 'L';
+
+  if (d.weight > 0 && d.height > 0) {
+    const bmi = (d.weight / (d.height * d.height)).toFixed(1);
+    document.getElementById('resBMI').innerText = bmi;
+    document.getElementById('resBMIUnit').innerText = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Healthy' : bmi < 30 ? 'Overweight' : 'Obese';
+  }
+  const fat = +document.getElementById('fat').value;
+  if (d.weight > 0 && fat > 0) {
+    document.getElementById('resLBM').innerText = (d.weight * (1 - fat / 100)).toFixed(1);
+  }
+
+  const pct = Math.min((d.waterIntake / target) * 100, 100);
+  setTimeout(() => { document.getElementById('hBar').style.width = pct + '%'; }, 300);
+  document.getElementById('hMessage').innerText = `You've had ${d.waterIntake}L today. To fully recover from your ${d.workoutType} session, aim for ${target}L by end of day.`;
+
+  const configs = {
+    Low: {
+      verdict: 'You\'ve recovered <em>beautifully.</em>',
+      summary: 'Your numbers suggest you\'re in a great place. Your heart rate is stable and your training load was handled well. You have the green light to push today.',
+      status: 'Train', dot: '', badge: '✅ Ready to Train',
+      steps: ['<strong>Morning:</strong> Light dynamic warm-up (10 min) to prime your joints.','<strong>Training:</strong> You can train at full intensity — your body is ready.','<strong>Nutrition:</strong> Hit your protein target (~1.6g/kg body weight) and carb up pre-session.','<strong>Evening:</strong> Aim for 7–9 hrs of sleep to lock in today\'s gains.','<strong>Tomorrow:</strong> Monitor your morning BPM — if elevated by 5+, ease off.']
+    },
+    Medium: {
+      verdict: 'A day for <em>gentle progress.</em>',
+      summary: 'Your body is still processing yesterday\'s work. It\'s not a day for a personal best, but light movement will help you bounce back faster.',
+      status: 'Careful', dot: 'warn', badge: '⚠️ Moderate Effort Only',
+      steps: ['<strong>Morning:</strong> 15-minute walk or gentle yoga flow.','<strong>Movement:</strong> Zone 2 cardio only — conversational pace, under 75% max HR.','<strong>Nutrition:</strong> Prioritise anti-inflammatory foods — berries, leafy greens, fatty fish.','<strong>Recovery:</strong> Cold shower or contrast therapy if available.','<strong>Sleep:</strong> Move bedtime 30 min earlier tonight.']
+    },
+    High: {
+      verdict: 'Your body is <em>asking for rest.</em>',
+      summary: 'With your current training frequency and heart rate data, you\'re carrying a heavy load. Trust the science: taking today off will make you stronger tomorrow.',
+      status: 'Rest', dot: 'rest', badge: '🔴 Full Recovery Day',
+      steps: ['<strong>Movement:</strong> 20-min easy walk maximum. Avoid structured exercise.','<strong>Therapy:</strong> Foam roll, gentle stretching, or massage if accessible.','<strong>Nutrition:</strong> Increase caloric intake slightly — your body is rebuilding.','<strong>Hydration:</strong> Prioritise the water target above everything else.','<strong>Sleep:</strong> Aim for 9+ hours. This is where the real gains happen.']
+    }
+  };
+  const cfg = configs[level];
+  document.getElementById('coachVerdict').innerHTML = cfg.verdict;
+  document.getElementById('coachSummary').innerText = cfg.summary;
+  document.getElementById('resStatus').innerText = cfg.status;
+  const dot = document.getElementById('badgeDot');
+  dot.className = 'badge-dot' + (cfg.dot ? ' ' + cfg.dot : '');
+  document.getElementById('badgeText').innerText = cfg.badge;
+
+  const stepsList = document.getElementById('routineSteps');
+  stepsList.innerHTML = cfg.steps.map((s, i) => `<li class="step-item"><div class="step-num">${i+1}</div><div class="step-text">${s}</div></li>`).join('');
+
+  // ── Show trend chart ──
+  document.getElementById('trendSection').classList.add('show');
+  renderChart(currentTabDays);
+
+  // ── Show personalized baselines (needs 5+ entries) ──
+  showBaselines(d);
+
+  document.getElementById('resultsPanel').classList.add('show');
+  document.getElementById('resultsPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  /* ── Show live connection status bar ── */
+  document.getElementById('connectionStatusBar').style.display = 'block';
+  // Update DB dot
+  const dbDotEl = document.getElementById('dbStatusDot');
+  if (dbDotEl) dbDotEl.style.background = '#F0C040'; // yellow while saving
+  // Update RAG inline
+  const ragInline = document.getElementById('ragStatusInline');
+  if (ragInline) ragInline.textContent = KNOWLEDGE_DB.length + ' protocols · github.com/Asma-Sardar/CorePulse-AI-Bootcamp';
+  // Update Groq status
+  const groqTxt = document.getElementById('groqStatusText');
+  if (groqTxt) groqTxt.textContent = 'Calling llama-3.3-70b…';
+  const groqDotEl = document.getElementById('groqStatusDot');
+  if (groqDotEl) groqDotEl.style.background = '#F0C040';
+
+  /* ── CorePulse DB: save session ── */
+  const trainingLoad = rs;
+  const weeklyLoad   = rs * (d.frequency / 7);
+  saveToCorePulseDB(
+    { ...d, fat: +document.getElementById('fat').value, gender: document.getElementById('gender').value },
+    level, (d.avgBPM / d.maxBPM) || 0,
+    trainingLoad, weeklyLoad
+  );
+
+  /* ── Groq LLM Coaching (RAG-enhanced, mirrors llm_coach.py) ── */
+  if (RAG_READY) {
+    showGroqLoading();
+    const kbDocs   = metadataRetrieve(lastRecoveryScore, d.workoutType, lastExperience);
+    const ragCtx   = kbDocs.map((doc, i) =>
+      '[Protocol ' + (i+1) + '] ' + (doc.title || '') + ': ' + (doc.protocol || '') +
+      (doc.actions && doc.actions.length ? ' Actions: ' + doc.actions.slice(0,3).join('. ') : '') +
+      (doc.warning ? ' Warning: ' + doc.warning : '')
+    ).join('\n\n');
+    const numericScore = rs <= 11216 ? 25 : rs <= 22417 ? 55 : 85;
+    getGroqCoachingAdvice(numericScore, ragCtx, d).then(advice => {
+      if (advice) {
+        injectGroqCoachCard(advice, numericScore);
+        const groqTxt = document.getElementById('groqStatusText');
+        if (groqTxt) groqTxt.textContent = 'Response received · llama-3.3-70b';
+        const groqDotEl = document.getElementById('groqStatusDot');
+        if (groqDotEl) groqDotEl.style.background = '#7AE08A';
+      } else {
+        const card = document.getElementById('groqCoachCard');
+        if (card) card.remove();
+        const groqTxt = document.getElementById('groqStatusText');
+        if (groqTxt) groqTxt.textContent = 'Unavailable';
+        const groqDotEl = document.getElementById('groqStatusDot');
+        if (groqDotEl) groqDotEl.style.background = '#F07070';
+      }
+    });
+  }
+}
+
+// ── On page load: restore saved profile ──
+window.addEventListener('DOMContentLoaded', () => {
+  loadKnowledgeBase();
+  restoreProfile();
+  // Show trend if history exists
+  const h = getHistory();
+  if (h.length >= 2) {
+    document.getElementById('trendSection').classList.add('show');
+    renderChart(7);
+  }
+});
+
+/* ════════════════════════════════════════════════
+   TAP-TO-MEASURE PULSE ENGINE
+   Formula: taps in 15 seconds × 4 = Resting BPM
+   ════════════════════════════════════════════════ */
+let tapTimer = null;
+let tapCount = 0;
+let tapSecondsLeft = 15;
+let tapRingInterval = null;
+
+function startTapMeasure() {
+  // Hide start button, show active widget
+  document.getElementById('tapStartBtn').style.display = 'none';
+  const active = document.getElementById('tapMeasureActive');
+  active.style.display = 'flex';
+  tapCount = 0;
+  tapSecondsLeft = 15;
+  document.getElementById('tapBeatCount').textContent = '0';
+  document.getElementById('tapTimerNum').textContent = '15';
+
+  // Animate the ring
+  const circle = document.getElementById('tapRingCircle');
+  const circumference = 163.4;
+  circle.style.strokeDashoffset = circumference;
+
+  tapRingInterval = setInterval(() => {
+    tapSecondsLeft--;
+    document.getElementById('tapTimerNum').textContent = tapSecondsLeft;
+    const progress = (15 - tapSecondsLeft) / 15;
+    circle.style.strokeDashoffset = circumference * (1 - progress);
+    circle.style.transition = 'stroke-dashoffset 0.9s linear';
+
+    if (tapSecondsLeft <= 0) finishTapMeasure();
+  }, 1000);
+}
+
+function recordTap() {
+  if (tapSecondsLeft <= 0 || tapSecondsLeft > 15) return;
+  tapCount++;
+  document.getElementById('tapBeatCount').textContent = tapCount;
+  // Pulse animation
+  const btn = document.getElementById('tapBeatBtn');
+  btn.classList.remove('pulse-anim');
+  void btn.offsetWidth;
+  btn.classList.add('pulse-anim');
+}
+
+function finishTapMeasure() {
+  clearInterval(tapRingInterval);
+  const bpm = tapCount * 4;
+  const active = document.getElementById('tapMeasureActive');
+  active.style.display = 'none';
+
+  // Set the field value
+  const restInput = document.getElementById('restBPM');
+  restInput.value = bpm;
+  restInput._tapMeasured = true;
+
+  // Show result
+  const box = document.getElementById('restResult');
+  let category = bpm < 50 ? 'Elite Athlete' : bpm < 60 ? 'Excellent' : bpm < 70 ? 'Good' : bpm < 80 ? 'Normal' : 'Above Average';
+  box.innerHTML = `<strong>${bpm} bpm</strong><small>❤️ Your measured resting BPM · ${tapCount} taps × 4 · ${category} range</small><br><button class="auto-use-btn" onclick="useValue('restBPM', ${bpm}); document.getElementById('tapMeasureWrap').innerHTML='<div style=\'font-size:11px;color:var(--accent-mid);margin-top:6px;\'>✅ ${bpm} bpm recorded — <button type=\"button\" class=\"tap-measure-btn\" style=\"padding:6px 12px;font-size:11px;\" onclick=\"resetTapMeasure()\">Re-measure</button></div>'">✓ Use ${bpm} bpm</button>`;
+  box.classList.add('show');
+  document.getElementById('restTag').textContent = '❤️ Tap-measured';
+  document.getElementById('restTag').classList.add('show');
+  updateInsights();
+  autoFillFromBase(); // Recalculate avg BPM with real resting value
+}
+
+function resetTapMeasure() {
+  const wrap = document.getElementById('tapMeasureWrap');
+  wrap.innerHTML = `<button type="button" class="tap-measure-btn" id="tapStartBtn" onclick="startTapMeasure()">❤️ Tap-to-Measure My Pulse</button>
+    <div class="tap-measure-active" id="tapMeasureActive" style="display:none">
+      <div class="tap-timer-ring">
+        <svg viewBox="0 0 60 60" class="tap-ring-svg">
+          <circle cx="30" cy="30" r="26" fill="none" stroke="var(--border)" stroke-width="4"/>
+          <circle cx="30" cy="30" r="26" fill="none" stroke="var(--accent)" stroke-width="4"
+            stroke-dasharray="163.4" stroke-dashoffset="163.4"
+            id="tapRingCircle" stroke-linecap="round" transform="rotate(-90 30 30)"/>
+        </svg>
+        <div class="tap-timer-num" id="tapTimerNum">15</div>
+      </div>
+      <div class="tap-right">
+        <button type="button" class="tap-beat-btn" id="tapBeatBtn" onclick="recordTap()">
+          <span id="tapBeatCount">0</span><small>taps</small>
+        </button>
+        <div class="tap-instruction">Tap every time<br>you feel a heartbeat</div>
+      </div>
+    </div>`;
+  document.getElementById('restBPM')._tapMeasured = false;
+}
+
+/* ════════════════════════════════════════════════
+   GITHUB KNOWLEDGE BASE — Live from CorePulse repo
+   Fetches: knowledge_base.json on page load
+   Falls back to EMBEDDED_KB if all fetches fail
+   ════════════════════════════════════════════════ */
+const GITHUB_KB_URL = 'https://raw.githubusercontent.com/Asma-Sardar/CorePulse-AI-Bootcamp/main/data/knowledge_base.json';
+
+// Full embedded fallback — real knowledge_base.json data
+const EMBEDDED_KB = [
+  {"id":"001","category":"recovery","readiness_range":"low","workout_type":"HIIT","experience_level":"beginner","title":"Post-HIIT Full Rest — Beginner","protocol":"Your body is showing high stress signals after a HIIT session. NSCA guidelines recommend beginners limit HIIT to 2-3 sessions per week with a maximum 10% weekly progression to avoid overreaching.","actions":["Complete rest — no structured exercise today","Sleep 8-9 hours tonight (Hatia et al., Cureus, 2024)","Drink at least 2.5-3 liters of water throughout the day","Eat a protein-rich meal within 30 minutes (ISSN Position Stand, 2017)","Light 10-minute walk only if you feel restless","Avoid caffeine after 2 PM"],"return_to_training":"Resume light training in 2 days. No HIIT for at least 3 days.","warning":"Beginners who exceed the 10% weekly HIIT progression rule see significantly higher injury rates.","sources":["NSCA HIIT Guidelines 2025","Hatia et al., Cureus 2024","ISSN Nutrient Timing Position Stand 2017"]},
+  {"id":"002","category":"recovery","readiness_range":"low","workout_type":"HIIT","experience_level":"intermediate","title":"Post-HIIT Active Recovery — Intermediate","protocol":"Your readiness is low after a high-intensity session. Active recovery after HIIT helps clear lactate without adding training stress (Menz et al., Frontiers in Physiology, 2018).","actions":["Active recovery only — 20-minute easy walk below 60% max HR","Foam roll major muscle groups for 10-15 minutes","Stretch hip flexors, hamstrings, and shoulders — hold 30-60 seconds","Hydrate with 2.5-3 liters minimum","Prioritize 7-8 hours of sleep","Consider a cold shower if muscles feel acutely sore"],"return_to_training":"Light training tomorrow. Return to HIIT in 2 days.","warning":"Consecutive HIIT sessions without recovery leads to non-functional overreaching.","sources":["Menz et al., Frontiers in Physiology 2018","Sports Medicine Open Systematic Review 2023"]},
+  {"id":"003","category":"recovery","readiness_range":"low","workout_type":"HIIT","experience_level":"advanced","title":"Post-HIIT Recovery — Advanced Athlete","protocol":"Even advanced athletes need recovery. Functional overreaching recovers in under 2 weeks; non-functional overreaching takes up to 4 weeks (Carrard et al., Sports Health, 2022).","actions":["Active recovery only — 30-minute easy swim or cycling at 50%","Mobility work: 20 minutes on problem areas","Nutrition: 1.6-2g protein per kg body weight","Sleep 7-9 hours — growth hormone peaks during deep sleep","Review weekly volume — deload (50% reduction) may be due","Monitor resting HR — if still 5+ BPM elevated, extend recovery"],"return_to_training":"Moderate intensity tomorrow. Full HIIT in 2 days only if readiness improves.","warning":"Advanced athletes who ignore low readiness are the primary OTS population.","sources":["Carrard et al., Sports Health 2022","ISSN Protein Timing Position Stand"]},
+  {"id":"004","category":"recovery","readiness_range":"low","workout_type":"Strength","experience_level":"beginner","title":"Post-Strength Full Rest — Beginner","protocol":"Muscle protein synthesis requires 48-72 hours in the same muscle group for beginners. Your low readiness confirms full rest is needed.","actions":["Complete rest from all resistance training","Light walking acceptable — under 20 minutes","Protein: 0.8-1.2g per kg body weight","Hydrate: 2-2.5 liters minimum","Sleep 8-9 hours","Gentle stretching only — no loading"],"return_to_training":"No same muscle groups for at least 48 hours.","warning":"Beginners need more recovery time than intermediate or advanced athletes.","sources":["Frontiers in Physiology 2025","ISSN Protein Timing Position Stand"]},
+  {"id":"005","category":"recovery","readiness_range":"low","workout_type":"Strength","experience_level":"intermediate","title":"Post-Strength Active Recovery — Intermediate","protocol":"CNS fatigue from heavy lifting accumulates beyond visible muscle soreness. Switch muscle groups or do active recovery today.","actions":["Switch to opposing muscle groups — upper/lower or push/pull split","Or: 20-minute light cardio below 65% max HR","Foam roll trained muscle groups for 10 minutes","Protein: 1.4-1.7g per kg today","Hydrate: 2.5-3 liters","7-8 hours sleep minimum"],"return_to_training":"Same muscle group in 48 hours.","warning":"Heavy compound movements create significant CNS fatigue beyond what muscles show.","sources":["NSCA Strength Training Recovery Guidelines","ISSN Nutrient Timing Position Stand"]},
+  {"id":"006","category":"recovery","readiness_range":"low","workout_type":"Strength","experience_level":"advanced","title":"Post-Strength Deload — Advanced","protocol":"Low readiness in an advanced strength athlete signals a deload. Deload weeks (40-50% volume reduction) preserve strength while allowing full systemic recovery.","actions":["Reduce volume by 40-50% if training today","Keep intensity moderate — no PR attempts","Prioritize mobility and activation work","Prioritize carbohydrates for glycogen replenishment","Sleep 7-9 hours","Consider formal deload every 4-6 training weeks"],"return_to_training":"Reduced intensity for 2-3 days before resuming full load.","warning":"Advanced athletes accumulate fatigue invisibly — performance plateaus are often the first sign.","sources":["NSCA Periodization Guidelines","Sports Psychiatry OTS Review 2024"]},
+  {"id":"007","category":"recovery","readiness_range":"low","workout_type":"Cardio","experience_level":"beginner","title":"Post-Cardio Rest — Beginner","protocol":"For beginners, even moderate cardio creates significant aerobic adaptation demand. Rest today allows physiological changes to consolidate.","actions":["Rest completely from structured exercise","Light walking only — under 15 minutes","Hydrate: 2.5-3 liters","Replenish carbohydrates — glycogen depleted after cardio","Sleep 8-9 hours","Elevate legs 10-15 minutes to reduce lower body fatigue"],"return_to_training":"Light cardio in 2 days below 60% max HR.","warning":"Beginners who overtrain cardio experience burnout and motivation loss.","sources":["ACSM Guidelines for Exercise Testing","NSCA Conditioning Guidelines"]},
+  {"id":"008","category":"recovery","readiness_range":"low","workout_type":"Cardio","experience_level":"intermediate","title":"Post-Cardio Active Recovery — Intermediate","protocol":"Consecutive moderate-high cardio elevates cortisol and impairs fat metabolism when recovery is insufficient.","actions":["Easy 20-minute walk or gentle yoga only","Focus on slow controlled breathing — parasympathetic activation","Carbohydrate-rich meal to restore glycogen","Hydrate: 2.5-3 liters with electrolytes if heavy sweating","Compression garments reduce lower limb soreness","Sleep 7-8 hours"],"return_to_training":"Easy cardio (Zone 1-2) tomorrow. Moderate in 2 days.","warning":"Inadequate cardio recovery elevates cortisol and impairs aerobic adaptation.","sources":["ACSM Cardiorespiratory Exercise Guidelines","Sports Medicine Post-Exercise Recovery 2025"]},
+  {"id":"009","category":"recovery","readiness_range":"low","workout_type":"Cardio","experience_level":"advanced","title":"Post-Cardio Recovery — Advanced Endurance Athlete","protocol":"Endurance athletes often feel subjectively recovered before physiological recovery is complete (Mann et al., 2024). Your readiness score gives the objective signal.","actions":["Easy Zone 1-2 only — 20-30 minutes maximum","Keep HR below 65% max","Prioritize carbohydrate and electrolyte replenishment","Sleep is your highest-priority recovery tool today","Massage or foam rolling for lower body","Review weekly mileage — acute volume spikes predict overuse injury"],"return_to_training":"Easy training tomorrow. Hard efforts in 2-3 days.","warning":"Trust your readiness score over subjective feel (Mann et al., 2024).","sources":["Mann et al., European Journal of Sport Science 2024","Walsh et al., BJSM 2021"]},
+  {"id":"010","category":"recovery","readiness_range":"low","workout_type":"Yoga","experience_level":"all","title":"Post-Yoga Recovery","protocol":"Even yoga creates physiological stress. Low readiness after yoga reflects accumulated systemic fatigue combined with the session.","actions":["Rest from structured exercise today","Gentle walking only","Hydration: 2-2.5 liters","Light protein meal","Sleep 8 hours minimum","Breathing or meditation — promotes parasympathetic recovery"],"return_to_training":"Gentle yoga or light movement tomorrow.","warning":"Low readiness after yoga often reflects systemic fatigue — look at your overall week.","sources":["ACSM Flexibility and Recovery Guidelines"]},
+  {"id":"011","category":"recovery","readiness_range":"medium","workout_type":"HIIT","experience_level":"beginner","title":"Moderate Readiness Post-HIIT — Beginner","protocol":"Moderate readiness — you can train but intensity must be controlled. NSCA: beginners never do back-to-back HIIT.","actions":["Light cardio only — 20-30 minutes at 60-65% max HR","Or: bodyweight mobility circuit at low effort","Avoid all high-intensity intervals today","Hydrate: 2-2.5 liters","Balanced meals with carbs and protein","Sleep 7-8 hours"],"return_to_training":"HIIT intensity tomorrow if readiness improves.","warning":"Moderate readiness means partial recovery — treating it as full readiness leads to overreaching.","sources":["NSCA HIIT Guidelines","ACSM Exercise Progression Guidelines"]},
+  {"id":"012","category":"recovery","readiness_range":"medium","workout_type":"HIIT","experience_level":"intermediate","title":"Moderate Readiness Post-HIIT — Intermediate","protocol":"Moderate readiness allows structured training at reduced intensity. Use this session for aerobic base building.","actions":["Moderate intensity — 70% of normal effort","Reduce interval count — remove one round","Or: strength at 70-75% 1RM","Hydrate: 2.5 liters","Post-workout protein within 30 minutes (ISSN 2017)","7-8 hours sleep"],"return_to_training":"Full intensity in 1-2 days.","warning":"Moderate readiness days: aerobic base at 70% — adaptation without recovery debt.","sources":["ISSN Nutrient Timing Position Stand 2017","NSCA Training Load Management Guidelines"]},
+  {"id":"013","category":"recovery","readiness_range":"medium","workout_type":"Strength","experience_level":"intermediate","title":"Moderate Readiness Strength — Intermediate","protocol":"You can train strength at moderate volume. Maximal efforts on moderate readiness significantly increases injury risk.","actions":["Train at 70-80% of normal working weight","Reduce sets by 1-2","Focus on form and mind-muscle connection","Warm up thoroughly: 10-15 minutes","Post-workout: carbs + protein combination","7-8 hours sleep"],"return_to_training":"Full intensity in 1-2 days.","warning":"Attempting PRs on moderate readiness is a documented cause of acute muscle strains.","sources":["Sports Medicine Narrative Review 2025","NSCA Strength Training Periodization Guidelines"]},
+  {"id":"014","category":"recovery","readiness_range":"medium","workout_type":"Strength","experience_level":"advanced","title":"Moderate Readiness Strength — Advanced","protocol":"Use moderate readiness for hypertrophy work, technique refinement, or accessory movements — not heavy compound lifts.","actions":["Hypertrophy focus: higher reps, 65-75% 1RM","Prioritize accessory and weak-point training","Avoid near-maximal singles or heavy compound work","Thorough warm-up including activation drills","Protein: 1.6-2g per kg body weight","Sleep 7-9 hours"],"return_to_training":"Full strength intensity in 1-2 days.","warning":"Consistently pushing through moderate readiness leads to overtraining syndrome.","sources":["ISSN Protein Requirements for Athletes","NSCA Advanced Periodization Guidelines"]},
+  {"id":"015","category":"recovery","readiness_range":"medium","workout_type":"Cardio","experience_level":"all","title":"Moderate Readiness Cardio","protocol":"Moderate readiness is appropriate for Zone 2 cardio (60-70% max HR) — aerobic base-building without recovery stress.","actions":["Easy to moderate cardio — 25-35 minutes Zone 2","HR between 60-70% max throughout","Talk test: you should hold a conversation","Hydrate: 500ml per 30 minutes of exercise","Carbs 1-2 hours before if needed","Sleep 7-8 hours"],"return_to_training":"Moderate-high intensity in 1-2 days.","warning":"Zone 2 is productive — pushing Zone 4-5 creates fatigue without proportional adaptation.","sources":["ACSM Cardiorespiratory Fitness Guidelines","Sports Medicine Post-Exercise Recovery 2025"]},
+  {"id":"016","category":"recovery","readiness_range":"high","workout_type":"HIIT","experience_level":"beginner","title":"High Readiness HIIT — Beginner","protocol":"Body is well recovered. NSCA: maintain 10% weekly volume increases max even when feeling great.","actions":["HIIT session at planned intensity — 20-30 minutes","Warm up 10 minutes before intervals","Keep to your program — no extra sets","Cool down 10 minutes","Post-workout nutrition within 30 minutes: protein + carbs","Sleep 8 hours to convert stimulus into adaptation"],"return_to_training":"Rest or active recovery tomorrow — no consecutive HIIT.","warning":"High readiness is not an invitation to overtrain. Beginners need 48 hours between HIIT sessions.","sources":["NSCA HIIT Beginner Guidelines 2025","ISSN Post-Workout Nutrition Guidelines"]},
+  {"id":"017","category":"recovery","readiness_range":"high","workout_type":"HIIT","experience_level":"intermediate","title":"High Readiness HIIT — Intermediate","protocol":"Excellent readiness. HIIT at 85-95% max HR on high readiness days produces the largest aerobic gains.","actions":["Full HIIT at planned intensity — 85-95% max HR","Can add one extra interval if strong — no more","Thorough warm-up: 10-12 minutes","Track performance metrics — benchmark session","Post-workout: protein + fast carbs within 30 minutes","Sleep 7-8 hours"],"return_to_training":"Active recovery or rest tomorrow.","warning":"High readiness days are for quality training — precise execution, not junk volume.","sources":["NSCA HIIT Evidence-Based Protocols","Frontiers in Physiology 2021"]},
+  {"id":"018","category":"recovery","readiness_range":"high","workout_type":"Strength","experience_level":"intermediate","title":"High Readiness Strength — Intermediate","protocol":"Your readiness is high. Progressive overload on well-recovered muscles is the primary driver of strength gains.","actions":["Full strength session at planned weights","Progressive overload: add 2.5-5kg if program allows","Warm up: 40%, 60%, 80% of working weight","Focus on compound movements: squat, hinge, press, pull","Post-workout: 20-40g protein within 30-45 minutes (ISSN)","Sleep 7-8 hours for overnight muscle protein synthesis"],"return_to_training":"Allow 48 hours before same muscle group.","warning":"Even on high readiness, form breakdown under fatigue causes injury.","sources":["ISSN Nutrient Timing Position Stand 2017","NSCA Strength Training Progression Guidelines"]},
+  {"id":"019","category":"recovery","readiness_range":"high","workout_type":"Strength","experience_level":"advanced","title":"High Readiness Strength — Advanced","protocol":"Peak readiness. Advanced periodization designates high-readiness for maximum effort, volume peaks, and PR attempts.","actions":["Train at full intensity — this is your performance day","PR attempts appropriate if warmed up and programmed","Full planned volume — no reductions","Pre-workout: carbs 2-3 hours before","Intra-workout hydration and electrolytes for sessions over 60 min","Post-workout: protein + carbs immediately","Sleep 8-9 hours"],"return_to_training":"Deload or reduced intensity for 1-2 days after maximum effort.","warning":"Save maximum efforts for high readiness — core principle of optimal periodization.","sources":["Sports Medicine Narrative Review 2025","NSCA Advanced Periodization and Peaking Guidelines"]},
+  {"id":"020","category":"recovery","readiness_range":"high","workout_type":"Cardio","experience_level":"intermediate","title":"High Readiness Cardio — Intermediate","protocol":"High readiness for cardio. Use this session for threshold or tempo efforts that drive the largest aerobic improvements.","actions":["Moderate to high intensity — 35-50 minutes","Tempo efforts: 20-30 minutes at 75-85% max HR","Warm up 10 minutes","Cool down 10 minutes","Hydrate: 500ml per 30 minutes","Carbohydrate-rich meal 2 hours before"],"return_to_training":"Easy cardio or rest tomorrow.","warning":"Quality efforts on high readiness — extra easy mileage adds recovery debt without benefit.","sources":["ACSM Cardiorespiratory Fitness Guidelines","Sports Medicine Post-Exercise Recovery 2025"]},
+  {"id":"021","category":"general","readiness_range":"all","workout_type":"all","experience_level":"all","title":"Sleep and Athletic Recovery","protocol":"Sleep is the single most powerful recovery intervention. Inadequate sleep negatively affects strength, endurance, cognition, and injury risk (Hatia et al., Cureus 2024).","actions":["7-9 hours is the evidence-based target for athletes","Consistent sleep and wake times improve quality","Avoid screens 30-60 minutes before sleep","Keep bedroom cool: 18-20 degrees Celsius","Avoid caffeine after 2 PM (5-6 hour half-life)","Extended wakefulness directly heightens perceived exertion next day"],"return_to_training":"N/A — universal guidance.","warning":"Chronic sleep below 6 hours reduces testosterone, elevates cortisol, impairs muscle recovery.","sources":["Hatia et al., Cureus 2024","Walsh et al., BJSM 2021","Frontiers in Physiology 2025"]},
+  {"id":"022","category":"general","readiness_range":"all","workout_type":"all","experience_level":"all","title":"Hydration Protocol","protocol":"Even 2% body weight dehydration impairs physical and cognitive performance. Hydration drives recovery speed.","actions":["Baseline: 35ml per kg body weight per day","Add 500-750ml per hour of moderate exercise","Add 750ml-1L per hour of intense exercise","Monitor urine color — pale yellow = well hydrated","Electrolytes essential for sessions over 60 minutes","Hydrate before feeling thirsty"],"return_to_training":"N/A — universal guidance.","warning":"High heat and humidity significantly elevate fluid loss and impact readiness scores.","sources":["ACSM Fluid Replacement Guidelines","IOC Consensus on Athlete Nutrition 2023"]},
+  {"id":"023","category":"general","readiness_range":"low","workout_type":"all","experience_level":"all","title":"Overtraining Syndrome — Warning Signs","protocol":"OTS develops when training stress exceeds recovery capacity. Acting on persistent low readiness prevents OTS (Carrard et al., 2022).","actions":["Warning: persistent low readiness 5+ consecutive days","Warning: resting HR 5+ BPM above personal baseline","Warning: declining performance despite consistent training","Warning: soreness not resolving within 72 hours","Warning: mood changes, irritability, disrupted sleep","If 3+ warning signs: full deload week — 40-50% volume reduction"],"return_to_training":"Full deload week before resuming normal load.","warning":"OTS can require months to reverse.","sources":["Carrard et al., Sports Health 2022","IOC 2023 Consensus Statement on REDs"]},
+  {"id":"024","category":"general","readiness_range":"low","workout_type":"all","experience_level":"all","title":"Elevated Resting Heart Rate — Protocol","protocol":"Elevated resting HR above personal baseline is one of the most validated OTS indicators. 5+ BPM elevation is a strong overtraining predictor.","actions":["5-7 BPM above baseline: reduce training intensity by 30%","8-10 BPM above baseline: active recovery only","10+ BPM above baseline: complete rest day","Parasympathetic recovery: slow diaphragmatic breathing","Eliminate stimulants: caffeine and pre-workout","Prioritize sleep and hydration above all"],"return_to_training":"Return when resting HR is within 3 BPM of baseline.","warning":"Persistently elevated resting HR is a reliable early OTS warning.","sources":["Wu Tsai Human Performance Alliance 2024"]},
+  {"id":"025","category":"nutrition","readiness_range":"all","workout_type":"all","experience_level":"all","title":"Post-Workout Nutrition","protocol":"The 30-minute post-exercise window is peak muscle protein synthesis — carbohydrate + protein intake most effectively accelerates recovery (ISSN 2017).","actions":["20-40g protein within 30-45 minutes — ISSN evidence-based range","Fast-digesting carbs: fruit, white rice, bread","Endurance athletes: 3:1 carb to protein ratio","Strength athletes: 2:1 carb to protein ratio","Rehydrate: 500ml-1L post-workout minimum","Avoid high-fat meals immediately post-workout"],"return_to_training":"N/A — nutrition guidance.","warning":"Skipping post-workout nutrition significantly impairs next-day readiness.","sources":["ISSN Nutrient Timing Position Stand 2017","Frontiers in Nutrition 2025"]}
+];
+
+let KNOWLEDGE_DB = [];
+let RAG_READY = false;
+
+async function loadKnowledgeBase() {
+  const statusEl = document.getElementById('ragStatus');
+  function setStatus(html) { if (statusEl) statusEl.innerHTML = html; }
+
+  const REPO   = 'Asma-Sardar/CorePulse-AI-Bootcamp';
+
+  // ── Load embedded KB immediately — instant, no network, no errors ──
+  KNOWLEDGE_DB = EMBEDDED_KB;
+  buildRAGIndex();
+  RAG_READY = true;
+  setStatus('<span style="color:var(--accent-mid)">✅ ' + KNOWLEDGE_DB.length + ' protocols · <a href="https://github.com/' + REPO + '" target="_blank" style="color:var(--accent-mid);font-weight:700;">CorePulse KB</a> · Ready</span>');
+
+  // Update all status indicators
+  const ragDotEl    = document.getElementById('ragDot');
+  const ragPillEl   = document.getElementById('ragPillText');
+  const ragInlineEl = document.getElementById('ragStatusInline');
+  if (ragDotEl)    ragDotEl.style.background = '#7AE08A';
+  if (ragPillEl)   ragPillEl.textContent = KNOWLEDGE_DB.length + ' protocols · CorePulse repo';
+  if (ragInlineEl) ragInlineEl.textContent = KNOWLEDGE_DB.length + ' protocols · github.com/' + REPO;
+
+  console.log('[Pulsera] KB ready — ' + KNOWLEDGE_DB.length + ' protocols from CorePulse repo');
+
+  // ── Try to upgrade silently from GitHub CDN in background ──
+  // If it works great. If not, embedded KB is already fully operational.
+  const CDN = 'https://cdn.jsdelivr.net/gh/' + REPO + '@main/data/knowledge_base.json';
+  const RAW = 'https://raw.githubusercontent.com/' + REPO + '/main/data/knowledge_base.json';
+
+  for (const url of [CDN, RAW]) {
+    try {
+      const controller = new AbortController();
+      const tid = setTimeout(() => controller.abort(), 4000);
+      const r = await fetch(url, { cache: 'no-cache', signal: controller.signal });
+      clearTimeout(tid);
+      if (!r.ok) continue;
+      const data = await r.json();
+      if (!Array.isArray(data) || data.length === 0) continue;
+      KNOWLEDGE_DB = data;
+      buildRAGIndex();
+      setStatus('<span style="color:var(--accent-mid)">✅ ' + data.length + ' protocols · <a href="https://github.com/' + REPO + '" target="_blank" style="color:var(--accent-mid);font-weight:700;">GitHub Live</a></span>');
+      if (ragPillEl) ragPillEl.textContent = data.length + ' protocols · GitHub live';
+      console.log('[Pulsera] KB upgraded to live GitHub — ' + data.length + ' protocols');
+      return;
+    } catch (_) { /* silent — embedded is serving */ }
+  }
+}
+
+
+// Metadata retriever — used to match KB entry to user's exact context
+function metadataRetrieve(readinessScore, workoutType, experienceLevel) {
+  const rRange = readinessScore <= 40 ? 'low' : readinessScore <= 70 ? 'medium' : 'high';
+  const wt = (workoutType || '').toLowerCase();
+  const el = (experienceLevel || '').toLowerCase();
+  let matches = KNOWLEDGE_DB.filter(d =>
+    (d.readiness_range === rRange || d.readiness_range === 'all') &&
+    (d.workout_type.toLowerCase() === wt || d.workout_type === 'all') &&
+    (d.experience_level.toLowerCase() === el || d.experience_level === 'all')
+  );
+  if (!matches.length) matches = KNOWLEDGE_DB.filter(d =>
+    (d.readiness_range === rRange || d.readiness_range === 'all') &&
+    (d.workout_type.toLowerCase() === wt || d.workout_type === 'all')
+  );
+  if (!matches.length) matches = KNOWLEDGE_DB.filter(d => d.readiness_range === rRange || d.readiness_range === 'all');
+  return matches.slice(0, 3);
+}
+
+let lastRecoveryScore = null;
+let lastWorkoutType = null;
+let lastExperience = null;
+let formSubmitted = false;
+
+
+/* ════════════════════════════════════════════════
+   RAG ENGINE — TF-IDF Cosine Similarity Retrieval
+   ════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════
+   RAG ENGINE — TF-IDF over GitHub knowledge_base.json
+   Built dynamically after KB loads (buildRAGIndex)
+   ════════════════════════════════════════════════ */
+const stopWords = new Set(['the','a','an','is','are','was','were','be','been','being','have','has','had','do','does','did','will','would','could','should','may','might','shall','to','of','in','on','at','by','for','with','from','and','or','but','not','it','its','i','my','me','we','our','you','your','they','their','this','that','these','those','what','how','when','where','why','which']);
+
+function tokenize(text) {
+  return String(text || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(t => t.length > 2 && !stopWords.has(t));
+}
+
+function docToText(doc) {
+  // Works with both old schema (doc.text) and new KB schema (doc.protocol + doc.actions)
+  if (doc.text) return doc.text + ' ' + (doc.tags || []).join(' ');
+  return (doc.title || '') + ' ' + (doc.protocol || '') + ' ' +
+         (doc.actions || []).join(' ') + ' ' + (doc.category || '') + ' ' +
+         (doc.workout_type || '') + ' ' + (doc.readiness_range || '') + ' ' + (doc.experience_level || '');
+}
+
+let _idf = {};
+let _docVectors = [];
+
+function buildRAGIndex() {
+  const allTokenSets = KNOWLEDGE_DB.map(doc => new Set(tokenize(docToText(doc))));
+  const N = KNOWLEDGE_DB.length;
+  _idf = {};
+  const vocab = new Set(allTokenSets.flatMap(s => [...s]));
+  for (const term of vocab) {
+    const df = allTokenSets.filter(s => s.has(term)).length;
+    _idf[term] = Math.log((N + 1) / (df + 1)) + 1;
+  }
+  function tfidfVec(tokens) {
+    const tf = {};
+    tokens.forEach(t => tf[t] = (tf[t] || 0) + 1);
+    const vec = {};
+    for (const [t, count] of Object.entries(tf)) vec[t] = (count / tokens.length) * (_idf[t] || 1);
+    return vec;
+  }
+  _docVectors = KNOWLEDGE_DB.map(doc => ({ doc, vec: tfidfVec(tokenize(docToText(doc))) }));
+}
+
+function cosineSim(a, b) {
+  const keys = new Set([...Object.keys(a), ...Object.keys(b)]);
+  let dot = 0, nA = 0, nB = 0;
+  for (const k of keys) { const av = a[k]||0, bv = b[k]||0; dot+=av*bv; nA+=av*av; nB+=bv*bv; }
+  return nA && nB ? dot / (Math.sqrt(nA) * Math.sqrt(nB)) : 0;
+}
+
+const RAG = {
+  retrieve(query, topK = 3) {
+    if (_docVectors.length === 0) return [];
+    function tfidfVec(tokens) {
+      const tf = {}; tokens.forEach(t => tf[t]=(tf[t]||0)+1);
+      const vec = {};
+      for (const [t,count] of Object.entries(tf)) vec[t]=(count/tokens.length)*(_idf[t]||1);
+      return vec;
+    }
+    const qVec = tfidfVec(tokenize(query));
+    const scored = _docVectors.map(({doc, vec}) => ({ doc, score: cosineSim(qVec, vec) }));
+    scored.sort((a, b) => b.score - a.score);
+    return scored.slice(0, topK).filter(s => s.score > 0.005).map(s => s.doc);
+  }
+};
+
+/* ════════════════════════════════════════════════
+   AI ASSISTANT LOGIC (RAG-Enhanced)
+   ════════════════════════════════════════════════ */
+let aiOpen = false;
+let aiLoading = false;
+
+function toggleAI() {
+  aiOpen = !aiOpen;
+  const win = document.getElementById('aiWindow');
+  const fab = document.getElementById('aiFab');
+  if (aiOpen) {
+    win.style.display = 'flex';
+    setTimeout(() => win.classList.add('open'), 10);
+    fab.classList.add('open');
+    fab.innerText = '✕';
+    document.getElementById('aiInput').focus();
+  } else {
+    win.classList.remove('open');
+    fab.classList.remove('open');
+    fab.innerText = '🌿';
+    setTimeout(() => { win.style.display = 'none'; }, 350);
+  }
+}
+
+function askQuick(q) {
+  document.getElementById('aiInput').value = q;
+  sendMessage();
+}
+
+function renderMarkdown(text) {
+  // Convert the structured 7-section format + common markdown to styled HTML
+  let html = text
+    // Escape raw HTML first for safety
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    // Bold section headers like **🕐 TIMELINE** → styled header divs
+    .replace(/\*\*(🕐 TIMELINE)\*\*/g,    '<div class="ai-section-header timeline">$1</div>')
+    .replace(/\*\*(🍽️ NUTRITION)\*\*/g,   '<div class="ai-section-header nutrition">$1</div>')
+    .replace(/\*\*(💧 HYDRATION)\*\*/g,   '<div class="ai-section-header hydration">$1</div>')
+    .replace(/\*\*(🧘 MOVEMENT)\*\*/g,    '<div class="ai-section-header movement">$1</div>')
+    .replace(/\*\*(😴 SLEEP)\*\*/g,       '<div class="ai-section-header sleep">$1</div>')
+    .replace(/\*\*(⚠️ WHAT TO EXPECT)\*\*/g, '<div class="ai-section-header expect">$1</div>')
+    .replace(/\*\*(🚫 AVOID)\*\*/g,       '<div class="ai-section-header avoid">$1</div>')
+    // Remaining **bold**
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    // *italic*
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    // Bullet lines starting with - or •
+    .replace(/^[-•] (.+)$/gm, '<li>$1</li>')
+    // Numbered lines
+    .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
+    // Wrap consecutive <li> in <ul>
+    .replace(/(<li>[\s\S]*?<\/li>)(\n<li>|$)/g, (m) => m)
+    // Double newline → paragraph break
+    .replace(/\n\n+/g, '</p><p>')
+    // Single newline → line break
+    .replace(/\n/g, '<br>');
+
+  // Wrap li groups
+  html = html.replace(/(<li>.*?<\/li>(<br>)?)+/gs, m =>
+    '<ul class="ai-list">' + m.replace(/<br>/g, '') + '</ul>'
+  );
+
+  return '<p>' + html + '</p>';
+}
+
+function appendMsg(text, role) {
+  const msgs = document.getElementById('aiMessages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  const isBot = role === 'bot';
+  const content = isBot ? renderMarkdown(text) : text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  div.innerHTML = `<div class="msg-icon">${isBot ? '🌿' : '👤'}</div><div class="msg-bubble${isBot ? ' rich' : ''}">${content}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('aiMessages');
+  const div = document.createElement('div');
+  div.className = 'msg bot'; div.id = 'typingMsg';
+  div.innerHTML = `<div class="msg-icon">🌿</div><div class="msg-bubble"><div class="typing-indicator"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingMsg');
+  if (t) t.remove();
+}
+
+async function sendMessage() {
+  if (aiLoading) return;
+  const input = document.getElementById('aiInput');
+  const userText = input.value.trim();
+  if (!userText) return;
+
+  input.value = '';
+  appendMsg(userText, 'user');
+  document.getElementById('quickBtns').style.display = 'none';
+  aiLoading = true;
+  document.getElementById('aiSendBtn').disabled = true;
+  showTyping();
+
+  // ── RAG: Retrieve relevant knowledge chunks ──
+  const retrievedDocs = RAG.retrieve(userText, 3);
+  function fmtDoc(d) {
+    if (d.text) return d.text; // old schema
+    let s = (d.title ? '[' + d.title + '] ' : '') + (d.protocol || '');
+    if (d.actions && d.actions.length) s += ' Actions: ' + d.actions.join('. ');
+    if (d.warning) s += ' Warning: ' + d.warning;
+    if (d.sources && d.sources.length) s += ' Sources: ' + d.sources.join(', ');
+    return s;
+  }
+  const ragContext = retrievedDocs.length > 0
+    ? '\n\n--- VERIFIED KNOWLEDGE BASE (use this to answer accurately) ---\n' +
+      retrievedDocs.map((d, i) => '[Source ' + (i+1) + ']: ' + fmtDoc(d)).join('\n\n') +
+      '\n--- END KNOWLEDGE BASE ---\n'
+    : '';
+
+  // Only inject user context if the form has actually been submitted this session
+  const userCtx = formSubmitted
+    ? `\n\n--- USER PROFILE (from their Pulsera check-in this session) ---
+Workout type: ${lastWorkoutType}
+Experience level: ${lastExperience}
+Recovery score: ${lastRecoveryScore}/100
+--- END PROFILE ---`
+    : '';
+
+  // Build RAG-enhanced system prompt
+  const systemPrompt = `You are a world-class personal recovery coach — think of the kind of coach who works with elite athletes but speaks to everyone like a real person, not a textbook. You are embedded in Pulsera, a science-backed recovery app.
+${ragContext}${userCtx}
+
+YOUR COACHING PHILOSOPHY:
+You have spent years working with athletes of every level. You know that the difference between good recovery and bad recovery isn't knowing the rules — it's knowing *why* the rules exist, and how to apply them to *this person, today*. You never give generic advice. You always reason from their specific situation.
+
+HOW YOU THINK AND SPEAK:
+- You talk the way a great coach talks in a locker room or a training session — direct, warm, specific, occasionally funny, always trustworthy.
+- You don't list rules. You explain *what's happening inside their body* and *what to do about it* — in plain language that makes them feel understood, not lectured.
+- You acknowledge what they did well. You notice when something they said is important. You react like a human.
+- When you give a recommendation, you briefly say *why* — one sentence of science, never a lecture.
+- You use exact numbers when you have them (protein grams, water ml, sleep hours, rest days) because that's what makes advice actually useful.
+- You never pad your answers. Every sentence earns its place.
+
+WHAT YOU KNOW (use this knowledge fluidly, never as a list of bullet points unless it truly helps):
+- Muscle protein synthesis windows, DOMS mechanisms, glycogen replenishment rates
+- Karvonen heart rate zones, HRV and recovery markers, CNS vs muscular fatigue
+- Sleep architecture (SWS, REM), growth hormone secretion, cortisol rhythm
+- Hydration: sweat rates, electrolyte loss, sodium/potassium balance
+- Periodization: overreaching vs overtraining, deload timing, acute:chronic workload ratio
+- Nutrition: leucine threshold (~2.5g), carb timing, anti-inflammatory foods
+- Injury risk: when fatigue becomes dangerous, warning signs to watch for
+- Beginner vs advanced physiology differences — these are NOT the same person
+
+HOW TO ADAPT YOUR RESPONSE:
+If they tell you their workout: give them a real recovery plan — not a template, a *conversation* about what their body needs right now. Cover the timeline, what to eat and when, hydration, movement/stretching, sleep. Make it feel like you're coaching them in person.
+If they ask a question: answer it directly and specifically, with reasoning.
+If they seem worried: reassure them with science, not platitudes.
+If they give you numbers (weight, BPM, duration): USE them. Calculate things. "At 75kg you need around 135g protein today" beats "eat enough protein."
+
+TONE — NON-NEGOTIABLE:
+- Warm but never fluffy. Encouraging but never fake.
+- Never start with "Great question!" or "Absolutely!" — that's assistant-speak, not coach-speak.
+- No headers unless you're giving a genuinely complex multi-part plan. Let the response flow naturally.
+- Don't end with "Let me know if you need anything!" — end with something useful or motivating.
+- If the knowledge base has a directly relevant protocol, weave it in naturally — don't quote it robotically.
+
+For medical issues, gently recommend a doctor. Never give dangerous advice.
+
+CRITICAL RULES:
+- If the user says "hi", "hello", or any greeting — respond warmly and briefly. Ask them about their workout. Do NOT reference any workout, score, or history unless they told you about it in this conversation.
+- NEVER invent or assume workout history. Only use data the user has explicitly told you in this chat, or data in the USER PROFILE block above (only present if they submitted the form).
+- If you have no workout data, simply ask what they did today.`;
+
+
+
+  // Multi-provider fallback chain — tries each in order until one succeeds
+  const providers = [
+    {
+      name: 'Gemini',
+      call: async () => {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAvoaWmDHsNGlYam6-b2N2SjITHp5s2nAw`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            system_instruction: { parts: [{ text: systemPrompt }] },
+            contents: [{ role: 'user', parts: [{ text: userText }] }],
+            generationConfig: { maxOutputTokens: 2000 }
+          })
+        });
+        const d = await res.json();
+        const t = d?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!t) throw new Error(d?.error?.message || 'No response');
+        return t;
+      }
+    },
+    {
+      name: 'Groq',
+      call: async () => {
+        const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
+          body: JSON.stringify({
+            model: 'llama-3.3-70b-versatile',
+            max_tokens: 2000,
+            messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userText }]
+          })
+        });
+        const d = await res.json();
+        const t = d?.choices?.[0]?.message?.content;
+        if (!t) throw new Error(d?.error?.message || 'No response');
+        return t;
+      }
+    },
+    {
+      name: 'OpenRouter',
+      call: async () => {
+        const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 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' },
+          body: JSON.stringify({
+            model: 'mistralai/mistral-7b-instruct:free',
+            max_tokens: 2000,
+            messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userText }]
+          })
+        });
+        const d = await res.json();
+        const t = d?.choices?.[0]?.message?.content;
+        if (!t) throw new Error(d?.error?.message || 'No response');
+        return t;
+      }
+    },
+    {
+      name: 'Zhipu-1',
+      call: async () => {
+        const res = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 84f3b4cae3c948c1a5a5cb0abccdb496.TPA8DjPmUqyIgIpI' },
+          body: JSON.stringify({
+            model: 'glm-4-flash',
+            max_tokens: 2000,
+            messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userText }]
+          })
+        });
+        const d = await res.json();
+        const t = d?.choices?.[0]?.message?.content;
+        if (!t) throw new Error(d?.error?.message || 'No response');
+        return t;
+      }
+    },
+    {
+      name: 'Zhipu-2',
+      call: async () => {
+        const res = await fetch('https://open.bigmodel.cn/api/paas/v4/chat/completions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer 4d69b906ee3d46bd8d4b8266048f7819.vVrg8RpKWmdbKZsaGP_tIauj' },
+          body: JSON.stringify({
+            model: 'glm-4-flash',
+            max_tokens: 2000,
+            messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userText }]
+          })
+        });
+        const d = await res.json();
+        const t = d?.choices?.[0]?.message?.content;
+        if (!t) throw new Error(d?.error?.message || 'No response');
+        return t;
+      }
+    }
+  ];
+
+  let reply = null;
+  for (const provider of providers) {
+    try {
+      reply = await provider.call();
+      if (reply) break;
+    } catch (e) {
+      console.warn(`${provider.name} failed:`, e.message);
+    }
+  }
+
+  removeTyping();
+  if (reply) {
+    appendMsg(reply, 'bot');
+    // Show RAG source attribution if docs were retrieved
+    if (retrievedDocs.length > 0) {
+      const msgs = document.getElementById('aiMessages');
+      const badge = document.createElement('div');
+      badge.className = 'rag-badge';
+      badge.textContent = `🔍 ${retrievedDocs.length} knowledge source${retrievedDocs.length > 1 ? 's' : ''} retrieved`;
+      msgs.appendChild(badge);
+
+      const toggleBtn = document.createElement('button');
+      toggleBtn.className = 'rag-toggle';
+      toggleBtn.textContent = 'Show sources ▾';
+      msgs.appendChild(toggleBtn);
+
+      const srcDiv = document.createElement('div');
+      srcDiv.className = 'rag-sources';
+      srcDiv.innerHTML = retrievedDocs.map((d, i) => {
+        const preview = d.text ? d.text.substring(0,100) : (d.protocol || '').substring(0,100);
+        const tags = d.tags ? d.tags.map(t => '#'+t).join(' ') : [d.readiness_range, d.workout_type, d.experience_level].filter(Boolean).join(' · ');
+        return '<strong>[' + (i+1) + '] ' + (d.title || '') + '</strong> ' + tags + ' — ' + preview + '…' +
+          (d.sources && d.sources.length ? '<br><small style="color:var(--gold)">📚 ' + d.sources.slice(0,2).join(' · ') + '</small>' : '');
+      }).join('<br>');
+      msgs.appendChild(srcDiv);
+
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = srcDiv.classList.toggle('show');
+        toggleBtn.textContent = isOpen ? 'Hide sources ▴' : 'Show sources ▾';
+      });
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+  } else {
+    appendMsg("All services are currently unavailable. Please check your connection and try again 🌿", 'bot');
+  }
+
+  aiLoading = false;
+  document.getElementById('aiSendBtn').disabled = false;
+  document.getElementById('aiInput').focus();
+}
+
+
+
+
+/* ════════════════════════════════════════════════
+   GROQ COACHING LLM — mirrors llm_coach.py
+   Model : llama-3.3-70b-versatile (same as repo)
+   Called after form submit to generate personalised
+   coaching advice injected into the results panel.
+   ════════════════════════════════════════════════ */
+const GROQ_API_KEY  = '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'; // from llm_coach.py
+const GROQ_MODEL    = 'llama-3.3-70b-versatile';
+const GROQ_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
+
+async function getGroqCoachingAdvice(recoveryScore, ragContext, formData) {
+  const expLabel = formData.experience === 1 ? 'beginner' : formData.experience === 3 ? 'advanced' : 'intermediate';
+  const prompt = `You are a personal fitness and recovery coach for Pulsera. Talk like a real coach — warm, direct, specific to their numbers. Never say "Protocol 1" or "Protocol 2" — weave the science naturally into your words.
+
+User: ${expLabel} | ${formData.workoutType} | ${formData.duration}h session | ${formData.calories} cal | ${formData.frequency}x/week
+Heart rate: resting ${formData.restBPM} → avg ${formData.avgBPM} → max ${formData.maxBPM} BPM
+Recovery score: ${recoveryScore}/100 | Water today: ${formData.waterIntake}L
+
+Relevant science (use naturally, not as a list):
+${ragContext}
+
+Write 3–4 sentences of real coaching advice using their actual numbers. Sound like you just watched them finish their session. End with one specific thing they should do tonight.`;
+
+  try {
+    const res = await fetch(GROQ_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + GROQ_API_KEY
+      },
+      body: JSON.stringify({
+        model:      GROQ_MODEL,
+        max_tokens: 300,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    return data?.choices?.[0]?.message?.content || null;
+  } catch (e) {
+    console.warn('[Groq Coach] LLM call failed:', e.message);
+    return null;
+  }
+}
+
+function injectGroqCoachCard(advice, recoveryScore) {
+  // Remove any existing card
+  const existing = document.getElementById('groqCoachCard');
+  if (existing) existing.remove();
+
+  const card = document.createElement('div');
+  card.id = 'groqCoachCard';
+  card.style.cssText = `
+    margin: 24px 0 0; padding: 24px 28px;
+    background: linear-gradient(135deg, var(--accent-light), #f0f7f1);
+    border: 1.5px solid rgba(45,74,53,0.18);
+    border-left: 4px solid var(--accent);
+    border-radius: 14px; animation: slideDown 0.4s ease;
+  `;
+  card.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;">🤖</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--accent);">Groq AI Coach</div>
+        <div style="font-size:10px;color:var(--sub);text-transform:uppercase;letter-spacing:1px;">llama-3.3-70b · RAG-enhanced · Recovery ${recoveryScore}/100</div>
+      </div>
+      <div style="margin-left:auto;font-size:10px;color:var(--accent-mid);background:var(--accent-light);border:1px solid rgba(74,122,88,0.3);border-radius:100px;padding:3px 10px;font-weight:600;">LIVE LLM</div>
+    </div>
+    <p style="font-size:14px;color:var(--text);line-height:1.75;margin:0;">${advice.replace(/\n/g,'<br>')}</p>
+    <div style="margin-top:14px;font-size:10px;color:var(--sub);display:flex;align-items:center;gap:6px;">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--accent-mid);display:inline-block;"></span>
+      Knowledge base: <strong style="color:var(--accent-mid)">${KNOWLEDGE_DB.length} protocols</strong> from <a href="https://github.com/Asma-Sardar/CorePulse-AI-Bootcamp" target="_blank" style="color:var(--accent-mid);font-weight:700;">CorePulse GitHub</a>
+    </div>
+  `;
+  // Mark Groq dot green
+  const gDot = document.getElementById('groqDot');
+  if (gDot) gDot.style.background = '#7AE08A';
+
+  // Inject right below the verdict card's summary
+  const verdictCard = document.querySelector('.verdict-card');
+  if (verdictCard) {
+    verdictCard.appendChild(card);
+  } else {
+    document.getElementById('resultsPanel').prepend(card);
+  }
+}
+
+// Show loading state while Groq thinks
+function showGroqLoading() {
+  const existing = document.getElementById('groqCoachCard');
+  if (existing) existing.remove();
+  const card = document.createElement('div');
+  card.id = 'groqCoachCard';
+  card.style.cssText = `
+    margin: 24px 0 0; padding: 20px 28px;
+    background: linear-gradient(135deg, var(--accent-light), #f0f7f1);
+    border: 1.5px solid rgba(45,74,53,0.18); border-left: 4px solid var(--accent);
+    border-radius: 14px; display:flex; align-items:center; gap:14px;
+  `;
+  card.innerHTML = `
+    <div style="width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🤖</div>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--accent);margin-bottom:4px;">Groq AI Coach is thinking…</div>
+      <div class="typing-indicator" style="padding:0;"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>
+    </div>
+  `;
+  const verdictCard = document.querySelector('.verdict-card');
+  if (verdictCard) verdictCard.appendChild(card);
+}
+/* ════════════════════════════════════════════════
+   COREPULSE DATABASE — IndexedDB
+   Mirrors the SQLite schema from app.py / corepulse.db:
+     • user_profile  (Age, Gender, Weight_kg, Height_m, BMI,
+                      Fat_Percentage, Experience_Level, Experience_Factor)
+     • daily_logs    (user_id, Max_BPM, Avg_BPM, Resting_BPM,
+                      Session_Duration_hours, Calories_Burned, Workout_Type,
+                      Workout_Frequency_days_week, Heart_Stress, Intensity,
+                      Training_Load, Weekly_Load, Calorie_Efficiency,
+                      Workout_Factor, log_date)
+   Repo: github.com/Asma-Sardar/CorePulse-AI-Bootcamp
+   ════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   COREPULSE DATABASE — localStorage (synchronous, zero latency)
+   Mirrors corepulse.db schema. No async, no IndexedDB, instant.
+   ═══════════════════════════════════════ */
+
+function dbSetStatus(pill, html, color) {
+  ['dbDot','dbStatusDot'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.background = color;
+  });
+  var p = document.getElementById('dbPillText');
+  var s = document.getElementById('dbStatus');
+  if (p) p.textContent = pill;
+  if (s) s.innerHTML   = html;
+}
+
+function dbGetSessions() {
+  try { return JSON.parse(localStorage.getItem('cp_sessions') || '[]'); } catch(e) { return []; }
+}
+
+function dbSaveSessions(sessions) {
+  if (!_lsAvailable) return false;
+  try { localStorage.setItem('cp_sessions', JSON.stringify(sessions)); return true; }
+  catch(e) { return false; }
+}
+
+function saveToCorePulseDB(formData, recoveryLevel, intensityVal, trainingLoad, weeklyLoad) {
+  try {
+    var sessions = dbGetSessions();
+    var hrr = (formData.maxBPM || 0) - (formData.restBPM || 0);
+    sessions.push({
+      ts:            Date.now(),
+      log_date:      new Date().toISOString().slice(0,10),
+      Age:           formData.age         || 25,
+      Gender:        formData.gender      || 'Unknown',
+      Weight_kg:     formData.weight      || 0,
+      Height_m:      formData.height      || 0,
+      BMI:           formData.height > 0 ? +((formData.weight/(formData.height*formData.height)).toFixed(1)) : 0,
+      Fat_Pct:       formData.fat         || 0,
+      Experience:    formData.experience === 1 ? 'Beginner' : formData.experience === 3 ? 'Advanced' : 'Intermediate',
+      Workout_Type:  formData.workoutType || 'Unknown',
+      Max_BPM:       formData.maxBPM      || 0,
+      Avg_BPM:       formData.avgBPM      || 0,
+      Rest_BPM:      formData.restBPM     || 0,
+      Duration_h:    formData.duration    || 0,
+      Calories:      formData.calories    || 0,
+      Frequency:     formData.frequency   || 0,
+      Heart_Stress:  hrr > 0 ? +(((formData.avgBPM - formData.restBPM) / hrr).toFixed(4)) : 0,
+      Intensity:     formData.maxBPM > 0 ? +((formData.avgBPM / formData.maxBPM).toFixed(4)) : 0,
+      Training_Load: trainingLoad   || 0,
+      Weekly_Load:   weeklyLoad     || 0,
+      Recovery_Level: recoveryLevel || 'Unknown'
+    });
+    var ok = dbSaveSessions(sessions);
+    var n  = sessions.length;
+    var s  = n + ' session' + (n !== 1 ? 's' : '');
+    if (ok) {
+      dbSetStatus('CorePulse DB · ' + s + ' saved',
+                  '💾 CorePulse DB · Session saved · <strong>' + s + '</strong>', '#7AE08A');
+    } else {
+      dbSetStatus('CorePulse DB · Storage full','⚠️ CorePulse DB · localStorage full','#F07070');
+    }
+  } catch(err) {
+    dbSetStatus('CorePulse DB · Error','⚠️ CorePulse DB · ' + err.message,'#F07070');
+  }
+}
+
+// Test localStorage availability first
+var _lsAvailable = (function() {
+  try {
+    localStorage.setItem('_cp_test', '1');
+    localStorage.removeItem('_cp_test');
+    return true;
+  } catch(e) { return false; }
+})();
+
+// Init status — use requestAnimationFrame to ensure DOM is painted
+requestAnimationFrame(function() {
+  if (!_lsAvailable) {
+    dbSetStatus('DB · localStorage blocked',
+                '⚠️ CorePulse DB · localStorage not available in this context','#F07070');
+    return;
+  }
+  var n = dbGetSessions().length;
+  var s = n + ' session' + (n !== 1 ? 's' : '') + ' stored';
+  dbSetStatus('CorePulse DB · Ready · ' + s,
+              '💾 CorePulse DB · Ready · <strong>' + s + '</strong>', '#7AE08A');
+});
+
+
+
+</script>
+</body>
+</html>
