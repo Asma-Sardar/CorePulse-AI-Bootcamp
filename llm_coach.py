@@ -1,6 +1,6 @@
 from groq import Groq
 
-client = Groq(api_key="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")
+client = Groq(api_key="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")
 
 def get_coaching_advice(recovery_score, rag_context):
     message = client.chat.completions.create(
