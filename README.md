@@ -27,7 +27,7 @@ Athletes overtrain. They push through fatigue, ignore warning signs, and only fe
 | 📈 **Trend Graphs** | Track your recovery trajectory over time |
 | 💧 **Hydration Intelligence** | Custom water targets based on your weight, session, and intensity |
 | ⚡ **Auto-Calculations** | Max BPM, body fat, HR reserve, VO₂ max — calculated live as you type |
-| 💬 **AI Chat Assistant** — Ask Pulsera AI Coach real-time questions about your recovery |
+| 💬 **AI Chat Assistant** | Ask Pulsera AI Coach real-time questions about your recovery |
 
 ---
 
